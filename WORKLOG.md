@@ -1,6 +1,6 @@
 # Work Log
 
-## GROUP MEMBER 1
+## GROUP MEMBER 1: Minesh Sumair
 
 ### date x
 
@@ -11,11 +11,11 @@ info
 info
 
 
-## GROUP MEMBER 2
+## GROUP MEMBER 2: Arlette Duran
 
-### date x
-
-info
+### date: May 22, 2023
+-created my branch and started to work on a basic level
+-tried implementing coins and etc
 
 ### date y
 
