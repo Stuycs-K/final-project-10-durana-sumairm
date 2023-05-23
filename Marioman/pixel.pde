@@ -70,7 +70,7 @@ public class pixel{
     }
     if(this.identifier == POWER){
       POWERimg = loadImage("Power.png");
-      image(POWERimg,x,y,20,20);
+      image(POWERimg,x+4.5,y+4.5,20,20);
     }
   }
 }
