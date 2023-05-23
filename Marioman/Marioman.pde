@@ -1,23 +1,26 @@
 grid map;
 levelOne l;
+PImage coin;
 
 void setup(){
   background(0);
   size(810,810);
   
   l = new levelOne();
-  map = new grid(l.getLevel());
-  
+  map = new grid(l.getLevel());  
   colorSquares(map);
+  
+  coin = loadImage("Coin.png");
    
 }
 
 void draw(){
-  background(0);
+  background(255);
   colorSquares(map);
 }
 
 void colorSquares(grid map){
+  coin = loadImage("Coin.png");
   int[][] level = l.getLevel();
   int squareSize = 30;;
 
@@ -30,7 +33,8 @@ void colorSquares(grid map){
         fill(255);
       } 
       else if (level[r][c] == grid.COIN) {
-        fill(225);
+        fill(255);
+        image(coin, r * 30, c * 30, 15, 15);
       } 
       else if (level[r][c] == grid.POWER) {
         fill(200, 0, 0); // Adjust color for powerup

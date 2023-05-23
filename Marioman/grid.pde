@@ -1,4 +1,5 @@
 public class grid{
+  PImage coin = loadImage("Coin.png");;
   private int[][] map;
   private int x;
   private int y;
@@ -25,6 +26,7 @@ public class grid{
         if(identifier == COIN){
           //coin pimg
           square(i * 30,j * 30,30);
+          image(coin, i * 30, j * 30, 15, 15);
         }
         if(identifier == POWER){
           // powerup pimg
