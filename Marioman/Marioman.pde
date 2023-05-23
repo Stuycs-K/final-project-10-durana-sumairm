@@ -58,6 +58,7 @@ public void drawBorder(){ // should be moved to each level class later
   map[15][29].identifier = pixel.SPACE;
   map[16][29].identifier = pixel.TLCORNER;
   map[1][1].identifier = pixel.COIN;
+  map[1][2].identifier = pixel.POWER;
 }
 
 public void insertCoins(){

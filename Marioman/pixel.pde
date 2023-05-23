@@ -12,6 +12,8 @@ public class pixel{
   private static final int COIN = 6; // every empty space starts off as a coin (per pacman game)
   private static final int POWER = 7; // scattered in corners of the maps
   private PImage COINimg;
+  private PImage POWERimg;
+  
   public pixel(int x1, int y1){
     this.x = x1;
     this.y = y1;
@@ -65,6 +67,10 @@ public class pixel{
     if(this.identifier == COIN){
       COINimg = loadImage("Coin.png");
       image(COINimg,x+7,y+7,15,15);
+    }
+    if(this.identifier == POWER){
+      POWERimg = loadImage("Power.png");
+      image(POWERimg,x,y,20,20);
     }
   }
 }
