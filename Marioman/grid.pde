@@ -6,6 +6,7 @@ public class grid{
   private static final int SPACE = 4;
   private static final int COIN = 0;
   private static final int POWER = 2;
+  private static final int GATE = 3;
   
   public grid(int[][] level){
     map = level;

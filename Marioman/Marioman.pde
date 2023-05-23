@@ -25,12 +25,18 @@ void colorSquares(grid map){
     for (int c = 0; c < level[r].length; c++) {
       if (level[r][c] == grid.WALL) {
         fill(0);
-      } else if (level[r][c] == grid.SPACE) {
+      } 
+      else if (level[r][c] == grid.SPACE) {
         fill(255);
-      } else if (level[r][c] == grid.COIN) {
+      } 
+      else if (level[r][c] == grid.COIN) {
         fill(225);
-      } else if (level[r][c] == grid.POWER) {
+      } 
+      else if (level[r][c] == grid.POWER) {
         fill(200, 0, 0); // Adjust color for powerup
+      }
+      else if (level[r][c] == grid.GATE) {
+        fill(150); 
       }
 
       rect(c * squareSize, r * squareSize, squareSize, squareSize);
