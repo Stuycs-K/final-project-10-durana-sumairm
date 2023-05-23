@@ -16,17 +16,29 @@ public class pixel{
     this.y = y1;
   }
   public void drawPixel(){
-    if(identifier == VWALL){
+    fill(0);
+    stroke(255); 
+    square(x,y,27); // FOR TESTING PURPOSES, to easily visualize the pixels
+    if(this.identifier == VWALL){
       stroke(#2121DE);
       fill(#2121DE);
       rect(x+4,y,4,27);
       rect(x+19,y,4,27);
     }
-    if(identifier == HWALL){
+    if(this.identifier == HWALL){
       stroke(#2121DE);
       fill(#2121DE);
       rect(x,y+4,27,4);
       rect(x,y+19,27,4);
+    }
+    if(this.identifier == TLCORNER){
+      stroke(#2121DE);
+      fill(#2121DE);
+      rect(x+4,y+20,4,10);
+      rect(x+19,y+25,4,5);
+      rect(x+20,y+4,10,4);
+      rect(x+25,y+19,5,4);
+      //square(
     }
   }
   

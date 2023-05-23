@@ -5,7 +5,7 @@ void setup(){
   size(810,810);
   int x = 0;
   int y = 0;
-  for(int i = 0; i < map.length; i++){ // sections the map into grids
+  for(int i = 0; i < map.length; i++){ // sections the map into pixels
     for(int j = 0; j < map[0].length; j++){
       map[i][j] = new pixel(x,y);
       x+= 27;
@@ -46,4 +46,8 @@ public void drawBorders(){
   for(int i = 1; i < map.length-1; i++){
     map[i][29].identifier = pixel.VWALL;
   }
+  map[14][0].identifier = pixel.SPACE;
+  map[15][0].identifier = pixel.SPACE;
+  map[14][29].identifier = pixel.SPACE;
+  map[15][29].identifier = pixel.SPACE;
 }
