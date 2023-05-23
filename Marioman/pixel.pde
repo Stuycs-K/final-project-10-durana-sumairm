@@ -17,58 +17,46 @@ public class pixel{
   }
   public void drawPixel(){
     fill(0);
-    stroke(255); 
+    strokeWeight(1);
+    stroke(255);
     square(x,y,27); // FOR TESTING PURPOSES, to easily visualize the pixels
     if(this.identifier == VWALL){
       stroke(#2121DE);
+      strokeWeight(1);
       fill(#2121DE);
       rect(x+4,y,4,27);
       rect(x+19,y,4,27);
     }
     if(this.identifier == HWALL){
       stroke(#2121DE);
+      strokeWeight(1);
       fill(#2121DE);
       rect(x,y+4,27,4);
       rect(x,y+19,27,4);
     }
     if(this.identifier == TLCORNER){
       stroke(#2121DE);
-      fill(#2121DE);
-      rect(x+4,y+20,4,10);
-      rect(x+19,y+25,4,5);
-      rect(x+20,y+4,10,4);
-      rect(x+25,y+19,5,4);
-      //square(
+      strokeWeight(6);
+      line(x+30,y+6,x+6,y+30);
+      line(x+30,y+21,x+21,y+30);
+    }
+    if(this.identifier == TRCORNER){
+      stroke(#2121DE);
+      strokeWeight(6);
+      line(x,y+6,x+21,y+30);
+      line(x,y+21,x+6,y+30);
+    }
+    if(this.identifier == BLCORNER){
+      stroke(#2121DE);
+      strokeWeight(6);
+      line(x+6,y,x+30,y+21);
+      line(x+21,y,x+30,y+6);
+    }
+    if(this.identifier == BRCORNER){
+      stroke(#2121DE);
+      strokeWeight(6);
+      line(x+6,y,x,y+6);
+      line(x+21,y,x,y+21);
     }
   }
-  
-  //public void startCenter(){
-  // rect(390, 365, 30, 10);
-  //  square(360, 360, 30);
-  //  square(330, 360, 30);
-  //  square(300, 360, 30);
-  //  square(360, 450, 30);    
-  //  square(330, 450, 30);
-  //  square(300, 390, 30);
-  //  square(300, 420, 30);
-  //  square(300, 450, 30);   
-  //  square(420, 360, 30);
-  //  square(450, 360, 30);
-  //  square(480, 360, 30);  
-  //  square(390, 450, 30);
-  //  square(420, 450, 30);
-  //  square(450, 450, 30);
-  //  square(480, 390, 30);
-  //  square(480, 420, 30);
-  //  square(480, 450, 30);
-  //}
-  
-  //public void borders(){
-  //  for (int i = 0; i < 27; i++){
-  //    square(i * 30, 0, 30);
-  //    square(i * 30, 780, 30);
-  //    square(0, i * 30, 30);
-  //    square(780, i * 30, 30);
-  //}
-  //}
 }
