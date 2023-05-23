@@ -11,10 +11,14 @@ public class pixel{
   private static final int BRCORNER = 5;
   private static final int COIN = 6; // every empty space starts off as a coin (per pacman game)
   private static final int POWER = 7; // scattered in corners of the maps
+  private PImage COINimg;
   public pixel(int x1, int y1){
     this.x = x1;
     this.y = y1;
   }
+
+// ==============================================================================================================
+
   public void drawPixel(){
     fill(0);
     strokeWeight(1);
@@ -57,6 +61,10 @@ public class pixel{
       strokeWeight(6);
       line(x+6,y,x,y+6);
       line(x+21,y,x,y+21);
+    }
+    if(this.identifier == COIN){
+      COINimg = loadImage("Coin.png");
+      image(COINimg,x+7,y+7,15,15);
     }
   }
 }
