@@ -3,26 +3,18 @@ public class grid{
   private int x;
   private int y;
   //public int identifier;
-  private final int VWALL = 0;
-  private final int HWALL = 1;
-  private final int TLCORNER = 2;
-  private final int TRCORNER = 3;
-  private final int BLCORNER = 4;
-  private final int BRCORNER = 5;
-  private final int SPACE = 7;
-  private final int COIN = 8;
-  private final int POWER = 9;
+  private final int WALL = 1;
+  private final int SPACE = 4;
+  private final int COIN = 0;
+  private final int POWER = 2;
   public void drawGrid(int[][] map){
     for (int i = 0; i < map.length; i++){
       for (int j = 0; j < map[i].length; j++){
         int identifier = map[i][j];
-        if(identifier == VWALL){
+        if(identifier == WALL){
           square(x,y,30);
         }
-        if(identifier == HWALL){
-          square(x,y,30);
-        }
-        if(identifier == CORNER){
+        if(identifier == SPACE){
           square(x,y,30);
         }
         if(identifier == COIN){
@@ -65,5 +57,5 @@ public class grid{
       square(0, i * 30, 30);
       square(780, i * 30, 30);
   }
-  }
+ }
 }
