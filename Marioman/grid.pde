@@ -7,23 +7,27 @@ public class grid{
   private static final int COIN = 0;
   private static final int POWER = 2;
   
-  public void drawGrid(int[][] map){
+  public grid(int[][] level){
+    map = level;
+  }
+  
+  public void drawGrid(){
     for (int i = 0; i < map.length; i++){
       for (int j = 0; j < map[i].length; j++){
         int identifier = map[i][j];
         if(identifier == WALL){
-          square(x,y,30);
+          square(i * 30,j * 30,30);
         }
         if(identifier == SPACE){
-          square(x,y,30);
+          square(i * 30,j * 30,30);
         }
         if(identifier == COIN){
           //coin pimg
-          square(x,y,30);
+          square(i * 30,j * 30,30);
         }
         if(identifier == POWER){
           // powerup pimg
-          square(x,y,30);
+          square(i * 30,j * 30,30);
         }
       }
     }

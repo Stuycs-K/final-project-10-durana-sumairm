@@ -1,30 +1,39 @@
+grid map;
+levelOne l;
+
 void setup(){
   background(0);
   size(810,810);
   
-  int[][] level = new levelOne();
+  l = new levelOne();
+  map = new grid(l.getLevel());
   
-  colorSquares(level);
+  colorSquares(map);
    
 }
 
 void draw(){
-  colorSquares(level);
+  background(0);
+  colorSquares(map);
 }
 
-void colorSquares(levelOne level){
-  int[][] map = level.createLevel();
-  for (int r = 0; r < map.length; r++){
-    for (int c = 0; c < map[r].length; c++){
-      if (map[r][c] == grid.WALL){
+void colorSquares(grid map){
+  int[][] level = map;
+  int squareSize = 30;;
+
+  for (int r = 0; r < level.length; r++) {
+    for (int c = 0; c < level[r].length; c++) {
+      if (level[r][c] == grid.WALL) {
         fill(255);
-      }
-      else if (map[r][c] == grid.SPACE){
+      } else if (level[r][c] == grid.SPACE) {
         fill(0);
-      }
-      else if (map[r][c] == grid.COIN){
+      } else if (level[r][c] == grid.COIN) {
         fill(150);
+      } else if (level[r][c] == grid.POWER) {
+        fill(200, 0, 0); // Adjust color for powerup
       }
+
+      rect(c * squareSize, r * squareSize, squareSize, squareSize);
     }
-  }
+}
 }
