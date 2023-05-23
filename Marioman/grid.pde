@@ -24,12 +24,9 @@ public class grid{
           square(i * 30,j * 30,30);
         }
         if(identifier == COIN){
-          //coin pimg
           square(i * 30,j * 30,30);
-          image(coin, i * 30, j * 30, 15, 15);
         }
         if(identifier == POWER){
-          // powerup pimg
           square(i * 30,j * 30,30);
         }
       }

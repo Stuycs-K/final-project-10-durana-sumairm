@@ -34,7 +34,7 @@ void colorSquares(grid map){
       } 
       else if (level[r][c] == grid.COIN) {
         fill(255);
-        image(coin, r * 30, c * 30, 15, 15);
+        image(coin, r * 30 + 3, c * 30 + 3, 25, 25);
       } 
       else if (level[r][c] == grid.POWER) {
         fill(200, 0, 0); // Adjust color for powerup
