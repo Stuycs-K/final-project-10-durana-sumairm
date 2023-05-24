@@ -2,7 +2,10 @@
 
 ## GROUP MEMBER 1: Minesh Sumair
 
-### date x
+### date: May 22, 2023
+-created branch grid-design
+  -implemented design for different types of blocks (e.g: vertical walls, horizontal walls, corners, coins, power-ups)
+  -implemented a basic border design baseline for different levels
 
 info
 
