@@ -2,15 +2,20 @@ public class pixel{
   private int x;
   private int y;
   public int identifier = -1; // default for an empty space
-  private static final int SPACE = 6;
-  private static final int VWALL = -1;
+  private static final int SPACE = -1;
+  private static final int VWALL = 0;
   private static final int HWALL = 1;
   private static final int TLCORNER = 2;
   private static final int TRCORNER = 3;
   private static final int BLCORNER = 4;
   private static final int BRCORNER = 5;
-  private static final int COIN = 0; // every empty space starts off as a coin (per pacman game)
-  private static final int POWER = 7; // scattered in corners of the maps
+  private static final int BLOCK = 6;
+  private static final int tEND = 7;
+  private static final int rEND = 8;
+  private static final int bEND = 9;
+  private static final int lEND = 10;
+  private static final int COIN = -2; // every empty space starts off as a coin (per pacman game)
+  private static final int POWER = -3; // scattered in corners of the maps
   private PImage COINimg;
   private PImage POWERimg;
   
@@ -25,20 +30,20 @@ public class pixel{
     fill(0);
     strokeWeight(1);
     stroke(255);
-    square(x,y,27); // FOR TESTING PURPOSES, to easily visualize the pixels
+    //square(x,y,27); // FOR TESTING PURPOSES, to easily visualize the pixels
     if(identifier == VWALL){
       stroke(#2121DE);
       strokeWeight(1);
       fill(#2121DE);
-      rect(x+4,y,4,27);
-      rect(x+19,y,4,27);
+      rect(x+4,y,4,30);
+      rect(x+19,y,4,30);
     }
     if(identifier == HWALL){
       stroke(#2121DE);
       strokeWeight(1);
       fill(#2121DE);
-      rect(x,y+4,27,4);
-      rect(x,y+19,27,4);
+      rect(x,y+4,30,4);
+      rect(x,y+19,30,4);
     }
     if(identifier == TLCORNER){
       stroke(#2121DE);
@@ -64,11 +69,54 @@ public class pixel{
       line(x+6,y,x,y+6);
       line(x+21,y,x,y+21);
     }
+    if(identifier == BLOCK){
+      stroke(#2121DE);
+      strokeWeight(1);
+      fill(#2121DE);
+      rect(x,y,4,30);
+      rect(x+26,y,4,30);
+      rect(x,y,30,4);
+      rect(x,y+26,30,4);
+    }
+    if(identifier == tEND){
+      stroke(#2121DE);
+      strokeWeight(1);
+      fill(#2121DE);
+      rect(x+4,y,4,30);
+      rect(x+19,y,4,30);
+      rect(x+4,y,15,4);
+    }
+    if(identifier == rEND){
+      stroke(#2121DE);
+      strokeWeight(1);
+      fill(#2121DE);
+      rect(x,y+4,30,4);
+      rect(x,y+19,30,4);
+      rect(x+26,y+4,4,15);
+    }
+    if(identifier == bEND){
+      stroke(#2121DE);
+      strokeWeight(1);
+      fill(#2121DE);
+      rect(x+4,y,4,30);
+      rect(x+19,y,4,30);
+      rect(x+4,y+26,15,4);
+    }
+    if(identifier == lEND){
+      stroke(#2121DE);
+      strokeWeight(1);
+      fill(#2121DE);
+      rect(x,y+4,30,4);
+      rect(x,y+19,30,4);
+      rect(x,y+4,4,15);
+    }
+    
     if(identifier == COIN){
       //COINimg = loadImage("Coin.png");
       //image(COINimg,x+7,y+7,15,15);
-      fill(255);
-      square(x+7, y+7, 5);
+      fill(#DEA185);
+      stroke(#DEA185);
+      square(x+10, y+10, 5);
     }
     if(identifier == POWER){
       POWERimg = loadImage("Power.png");
