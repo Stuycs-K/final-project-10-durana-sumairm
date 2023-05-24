@@ -1,4 +1,4 @@
-public class levelOne{
+public class levels{
  
   private int[][] level1Map = new int[][]{
       {-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-3,-2,-2},
@@ -28,7 +28,7 @@ public class levelOne{
       {-2,4,1,1,1,8,-2,10,1,1,1,1,8,-2,10,1,1,1,1,1,8,-2,10,5,-2}
   };
   
-  public levelOne(){
+  public levels(){
   }
   
   public int[][] getLevel(){

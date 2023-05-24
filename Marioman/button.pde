@@ -5,7 +5,7 @@ public class button{
   static final int bDOWN = 4;
   boolean [] inputs;
   
-   public Controller() {
+   public button() {
     inputs = new boolean[4];//4 valid buttons
   }
 
@@ -37,4 +37,3 @@ public class button{
 }
   
   
-}

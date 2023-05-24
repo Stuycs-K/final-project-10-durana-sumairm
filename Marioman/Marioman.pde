@@ -1,4 +1,4 @@
-levelOne l;
+levels l;
 PImage coin;
 pixel[][] map = new pixel[27][27];
 
@@ -18,7 +18,7 @@ void setup(){
     y+=30;
   }
   
-  l = new levelOne();
+  l = new levels();
 
   drawMaze();
   drawBorder();
@@ -37,7 +37,7 @@ void draw(){
 }
 
 public void drawMaze(){
-  l = new levelOne();
+  l = new levels();
   int[][] level = l.getLevel();
   for (int i = 1; i < map.length-1; i++){
     for (int j = 1; j < map[i].length-1; j++){
