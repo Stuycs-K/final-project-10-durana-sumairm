@@ -18,7 +18,7 @@ public class pixel{
     this.x = x1;
     this.y = y1;
   }
-
+  
 // ==============================================================================================================
 
   public void drawPixel(){
@@ -26,49 +26,51 @@ public class pixel{
     strokeWeight(1);
     stroke(255);
     square(x,y,27); // FOR TESTING PURPOSES, to easily visualize the pixels
-    if(this.identifier == VWALL){
+    if(identifier == VWALL){
       stroke(#2121DE);
       strokeWeight(1);
       fill(#2121DE);
       rect(x+4,y,4,27);
       rect(x+19,y,4,27);
     }
-    if(this.identifier == HWALL){
+    if(identifier == HWALL){
       stroke(#2121DE);
       strokeWeight(1);
       fill(#2121DE);
       rect(x,y+4,27,4);
       rect(x,y+19,27,4);
     }
-    if(this.identifier == TLCORNER){
+    if(identifier == TLCORNER){
       stroke(#2121DE);
       strokeWeight(6);
       line(x+30,y+6,x+6,y+30);
       line(x+30,y+21,x+21,y+30);
     }
-    if(this.identifier == TRCORNER){
+    if(identifier == TRCORNER){
       stroke(#2121DE);
       strokeWeight(6);
       line(x,y+6,x+21,y+30);
       line(x,y+21,x+6,y+30);
     }
-    if(this.identifier == BLCORNER){
+    if(identifier == BLCORNER){
       stroke(#2121DE);
       strokeWeight(6);
       line(x+6,y,x+30,y+21);
       line(x+21,y,x+30,y+6);
     }
-    if(this.identifier == BRCORNER){
+    if(identifier == BRCORNER){
       stroke(#2121DE);
       strokeWeight(6);
       line(x+6,y,x,y+6);
       line(x+21,y,x,y+21);
     }
-    if(this.identifier == COIN){
-      COINimg = loadImage("Coin.png");
-      image(COINimg,x+7,y+7,15,15);
+    if(identifier == COIN){
+      //COINimg = loadImage("Coin.png");
+      //image(COINimg,x+7,y+7,15,15);
+      fill(255);
+      square(x+7, y+7, 5);
     }
-    if(this.identifier == POWER){
+    if(identifier == POWER){
       POWERimg = loadImage("Power.png");
       image(POWERimg,x+4.5,y+4.5,20,20);
     }
