@@ -23,3 +23,7 @@ info
 ### date: May 23, 2023
 -fixed the maze by combining both of our versions
 -realized we cant load a bunch of coin images but we will deal with that later
+
+### date: May 24, 2023
+-started on character class
+-started on buttons class (arrow keys) in order to move the character but we aren't sure if that is needed
