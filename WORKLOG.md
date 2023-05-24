@@ -20,6 +20,6 @@ info
 -created my branch and started to work on a basic level
 -tried implementing coins and etc
 
-### date y
-
-info
+### date: May 23, 2023
+-fixed the maze by combining both of our versions
+-realized we cant load a bunch of coin images but we will deal with that later
