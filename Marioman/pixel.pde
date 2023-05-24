@@ -30,7 +30,7 @@ public class pixel{
     fill(0);
     strokeWeight(1);
     stroke(255);
-    //square(x,y,27); // FOR TESTING PURPOSES, to easily visualize the pixels
+    //square(x,y,30); // FOR TESTING PURPOSES, to easily visualize the pixels
     if(identifier == VWALL){
       stroke(#2121DE);
       strokeWeight(1);
@@ -71,12 +71,9 @@ public class pixel{
     }
     if(identifier == BLOCK){
       stroke(#2121DE);
-      strokeWeight(1);
-      fill(#2121DE);
-      rect(x,y,4,30);
-      rect(x+26,y,4,30);
-      rect(x,y,30,4);
-      rect(x,y+26,30,4);
+      strokeWeight(6);
+      fill(0);
+      square(x+5,y+5,20);
     }
     if(identifier == tEND){
       stroke(#2121DE);
