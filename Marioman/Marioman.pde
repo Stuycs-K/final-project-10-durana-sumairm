@@ -26,7 +26,6 @@ void setup(){
 
 void draw(){
   if(levelNum != 0){
-    
     background(0);
     for(int i = 0; i < map.length; i++){
       for(int j = 0; j < map[0].length; j++){
@@ -35,8 +34,25 @@ void draw(){
     }
     player.move();
     player.display();
+    println(keyCode);
   }
 }
+
+void keyPressed(){
+      if(keyCode == UP && map[(int)(player.y/30)-1][(int)(player.x/30)].identifier < 0){
+        player.direction = 0;
+      }
+      if(keyCode == RIGHT && map[(int)(player.y/30)][(int)(player.x/30)+1].identifier < 0){
+        player.direction = 1;
+      }
+      if(keyCode == DOWN && map[(int)(player.y/30)+1][(int)(player.x/30)].identifier < 0){
+        player.direction = 2;
+      }
+      if(keyCode == LEFT && map[(int)(player.y/30)][(int)(player.x/30)-1].identifier < 0){
+        player.direction = 3;
+      }
+  }
+  
 
 //=============================== MAZE DRAWING METHODS
 

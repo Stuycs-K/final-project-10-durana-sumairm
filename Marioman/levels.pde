@@ -28,7 +28,7 @@ public class levels{
       {-2,4,1,1,1,8,-2,10,1,1,1,1,8,-2,10,1,1,1,1,1,8,-2,10,5,-2}
   };
   
-  // should range from 1-10
+  // levelNum should range from 1-10
   public levels(int levelNum){
     if(levelNum == 1){
       selectedLevel = level1Map;
