@@ -35,8 +35,16 @@ void draw(){
     player.move();
     player.display();
   }
+  drawScore();
 }
 
+void drawScore(){
+  fill(0);
+  rect(0, 0, 150, 20);
+  fill(255);
+  textSize(15);
+  text("SCORE: ", 5, 15);
+}
 void keyPressed(){
       if(keyCode == UP && map[(int)(player.y/30)-1][(int)(player.x/30)].identifier < 0){
         player.direction = 0;
