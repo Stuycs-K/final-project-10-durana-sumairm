@@ -124,7 +124,7 @@ public void drawBorder(){ // should be moved to each level class later
 
 void drawScore(){
   fill(0);
-  rect(0, 0, 150, 20);
+  rect(0, 0, 120, 20);
   fill(255);
   textSize(15);
   text("SCORE: " + score , 5, 15);
@@ -133,8 +133,11 @@ void drawScore(){
 void countScore(){
   int x = (int) player.x;
   int y = (int) player.y;
-  if (map[x/30][y/30].identifier == pixel.COIN){
+  if (map[y/30][x/30].identifier == pixel.COIN){
     score += 10;
-    map[x/30][y/30].identifier = pixel.SPACE;
+    map[y/30][x/30].identifier = pixel.SPACE;
+  }
+  if (map[y/30][x/30].identifier == pixel.POWER){
+    map[y/30][x/30].identifier = pixel.SPACE;
   }
 }
