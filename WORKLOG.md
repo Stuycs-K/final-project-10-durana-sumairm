@@ -7,9 +7,11 @@
   -implemented design for different types of blocks (e.g: vertical walls, horizontal walls, corners, coins, power-ups)
   -implemented a basic border design baseline for different levels
 
-info
+### date: May 23, 2023
+-did some touching up on the maze design and added a few more wall types to make everything aesthetically pleasing
 
-### date y
+### date: May 24, 2023
+-
 
 info
 
