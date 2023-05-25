@@ -36,38 +36,38 @@ public class pixel{
       strokeWeight(1);
       fill(#2121DE);
       rect(x+4,y,4,30);
-      rect(x+19,y,4,30);
+      rect(x+22,y,4,30);
     }
     if(identifier == HWALL){
       stroke(#2121DE);
       strokeWeight(1);
       fill(#2121DE);
       rect(x,y+4,30,4);
-      rect(x,y+19,30,4);
+      rect(x,y+22,30,4);
     }
     if(identifier == TLCORNER){
       stroke(#2121DE);
       strokeWeight(6);
       line(x+30,y+6,x+6,y+30);
-      line(x+30,y+21,x+21,y+30);
+      line(x+30,y+24,x+24,y+30);
     }
     if(identifier == TRCORNER){
       stroke(#2121DE);
       strokeWeight(6);
-      line(x,y+6,x+21,y+30);
-      line(x,y+21,x+6,y+30);
+      line(x,y+6,x+24,y+30);
+      line(x,y+24,x+6,y+30);
     }
     if(identifier == BLCORNER){
       stroke(#2121DE);
       strokeWeight(6);
-      line(x+6,y,x+30,y+21);
-      line(x+21,y,x+30,y+6);
+      line(x+6,y,x+30,y+24);
+      line(x+24,y,x+30,y+6);
     }
     if(identifier == BRCORNER){
       stroke(#2121DE);
       strokeWeight(6);
       line(x+6,y,x,y+6);
-      line(x+21,y,x,y+21);
+      line(x+24,y,x,y+24);
     }
     if(identifier == BLOCK){
       stroke(#2121DE);
@@ -80,32 +80,32 @@ public class pixel{
       strokeWeight(1);
       fill(#2121DE);
       rect(x+4,y,4,30);
-      rect(x+19,y,4,30);
-      rect(x+4,y,15,4);
+      rect(x+22,y,4,30);
+      rect(x+4,y,22,4);
     }
     if(identifier == rEND){
       stroke(#2121DE);
       strokeWeight(1);
       fill(#2121DE);
       rect(x,y+4,30,4);
-      rect(x,y+19,30,4);
-      rect(x+26,y+4,4,15);
+      rect(x,y+22,30,4);
+      rect(x+26,y+4,4,22);
     }
     if(identifier == bEND){
       stroke(#2121DE);
       strokeWeight(1);
       fill(#2121DE);
       rect(x+4,y,4,30);
-      rect(x+19,y,4,30);
-      rect(x+4,y+26,15,4);
+      rect(x+22,y,4,30);
+      rect(x+4,y+26,22,4);
     }
     if(identifier == lEND){
       stroke(#2121DE);
       strokeWeight(1);
       fill(#2121DE);
       rect(x,y+4,30,4);
-      rect(x,y+19,30,4);
-      rect(x,y+4,4,15);
+      rect(x,y+22,30,4);
+      rect(x,y+4,4,22);
     }
     
     if(identifier == COIN){
