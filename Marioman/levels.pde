@@ -1,5 +1,5 @@
 public class levels{
- 
+  private int[][] selectedLevel;
   private int[][] level1Map = new int[][]{
       {-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-2,-3,-2,-2},
       {-2,7,-2,7,-2,2,8,-2,10,1,1,1,1,8,-2,10,1,3,-2,10,1,1,1,3,-2},
@@ -28,10 +28,14 @@ public class levels{
       {-2,4,1,1,1,8,-2,10,1,1,1,1,8,-2,10,1,1,1,1,1,8,-2,10,5,-2}
   };
   
-  public levels(){
+  // levelNum should range from 1-10
+  public levels(int levelNum){
+    if(levelNum == 1){
+      selectedLevel = level1Map;
+    }
   }
   
   public int[][] getLevel(){
-     return level1Map;
-    }
+    return selectedLevel;
+  }
 }

@@ -1,6 +1,7 @@
 levels l;
-PImage coin;
+int levelNum = 1; // should start at zero, but we'll worry about this when we implement a menu
 pixel[][] map = new pixel[27][27];
+character player = new character();
 
 
 void setup(){
@@ -8,7 +9,6 @@ void setup(){
   size(810,810);
   int x = 0;
   int y = 0;
-  
   for(int i = 0; i < map.length; i++){ // sections the map into pixels
     for(int j = 0; j < map[0].length; j++){
       map[i][j] = new pixel(x,y);
@@ -18,26 +18,46 @@ void setup(){
     y+=30;
   }
   
-  l = new levels();
-
+  // will be moved somewhere else soon
   drawMaze();
   drawBorder();
   drawGhostSpawn();
-  for(int i = 0; i < map.length; i++){ // test for now, 
-                        //implement this in some other class to draw the initial maze
-    for(int j = 0; j < map[0].length; j++){
-      map[i][j].drawPixel();
-    }
-  }
-   
 }
 
 void draw(){
-  
+  if(levelNum != 0){
+    background(0);
+    for(int i = 0; i < map.length; i++){
+      for(int j = 0; j < map[0].length; j++){
+        map[i][j].drawPixel();
+      }
+    }
+    player.move();
+    player.display();
+    println(keyCode);
+  }
 }
 
+void keyPressed(){
+      if(keyCode == UP && map[(int)(player.y/30)-1][(int)(player.x/30)].identifier < 0){
+        player.direction = 0;
+      }
+      if(keyCode == RIGHT && map[(int)(player.y/30)][(int)(player.x/30)+1].identifier < 0){
+        player.direction = 1;
+      }
+      if(keyCode == DOWN && map[(int)(player.y/30)+1][(int)(player.x/30)].identifier < 0){
+        player.direction = 2;
+      }
+      if(keyCode == LEFT && map[(int)(player.y/30)][(int)(player.x/30)-1].identifier < 0){
+        player.direction = 3;
+      }
+  }
+  
+
+//=============================== MAZE DRAWING METHODS
+
 public void drawMaze(){
-  l = new levels();
+  l = new levels(levelNum);
   int[][] level = l.getLevel();
   for (int i = 1; i < map.length-1; i++){
     for (int j = 1; j < map[i].length-1; j++){

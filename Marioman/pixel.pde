@@ -113,7 +113,7 @@ public class pixel{
       //image(COINimg,x+7,y+7,15,15);
       fill(#DEA185);
       stroke(#DEA185);
-      square(x+10, y+10, 5);
+      square(x+12.5, y+12.5, 5);
     }
     if(identifier == POWER){
       POWERimg = loadImage("Power.png");
