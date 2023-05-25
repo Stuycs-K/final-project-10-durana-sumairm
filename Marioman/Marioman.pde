@@ -34,7 +34,6 @@ void draw(){
     }
     player.move();
     player.display();
-    println(keyCode);
   }
 }
 
