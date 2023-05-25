@@ -3,15 +3,17 @@
 ## GROUP MEMBER 1: Minesh Sumair
 
 ### date: May 22, 2023
--created branch grid-design
-  -implemented design for different types of blocks (e.g: vertical walls, horizontal walls, corners, coins, power-ups)
-  -implemented a basic border design baseline for different levels
+- created branch grid-design
+  - implemented design for different types of blocks (e.g: vertical walls, horizontal walls, corners, coins, power-ups)
+  - implemented a basic border design baseline for different levels
 
 ### date: May 23, 2023
--did some touching up on the maze design and added a few more wall types to make everything aesthetically pleasing
+- did some touching up on the maze design and added a few more wall types to make everything aesthetically pleasing
 
 ### date: May 24, 2023
--
+- worked further on the character class
+  - added movement for our player character — need to figure out ghosts
+  - need to figure out the proper arithmetic for proper alignment between the walls
 
 info
 
