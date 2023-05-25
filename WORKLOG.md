@@ -31,3 +31,7 @@ info
 ### date: May 24, 2023
 -started on character class
 -started on buttons class (arrow keys) in order to move the character but we aren't sure if that is needed
+
+### date: May 25, 2023
+-worked on score counter
+-worked on removing coin once the character eats it
