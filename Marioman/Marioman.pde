@@ -2,7 +2,7 @@ levels l;
 int levelNum = 1; // should start at zero, but we'll worry about this when we implement a menu
 pixel[][] map = new pixel[27][27];
 character player = new character();
-
+int score = 0;
 
 void setup(){
   background(0);
@@ -33,18 +33,12 @@ void draw(){
       }
     }
     player.move();
+    countScore();
     player.display();
   }
   drawScore();
 }
 
-void drawScore(){
-  fill(0);
-  rect(0, 0, 150, 20);
-  fill(255);
-  textSize(15);
-  text("SCORE: ", 5, 15);
-}
 void keyPressed(){
       if(keyCode == UP && map[(int)(player.y/30)-1][(int)(player.x/30)].identifier < 0){
         player.direction = 0;
@@ -126,4 +120,21 @@ public void drawBorder(){ // should be moved to each level class later
   map[13][26].identifier = pixel.BLCORNER;
   map[14][26].identifier = pixel.SPACE;
   map[15][26].identifier = pixel.TLCORNER;
+}
+
+void drawScore(){
+  fill(0);
+  rect(0, 0, 150, 20);
+  fill(255);
+  textSize(15);
+  text("SCORE: " + score , 5, 15);
+}
+
+void countScore(){
+  int x = (int) player.x;
+  int y = (int) player.y;
+  if (map[x/30][y/30].identifier == pixel.COIN){
+    score += 10;
+    map[x/30][y/30].identifier = pixel.SPACE;
+  }
 }
