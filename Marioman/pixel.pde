@@ -109,8 +109,6 @@ public class pixel{
     }
     
     if(identifier == COIN){
-      //COINimg = loadImage("Coin.png");
-      //image(COINimg,x+7,y+7,15,15);
       fill(#DEA185);
       stroke(#DEA185);
       square(x+12.5, y+12.5, 5);

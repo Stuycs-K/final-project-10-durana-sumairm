@@ -8,6 +8,7 @@ public class character{
     x = -27;
     y = 432;
     direction = 1;
+    charImage = Mario;
   }
   
   
@@ -36,6 +37,6 @@ public class character{
   public void display(){
     fill(255);
     stroke(255);
-    square(x+5,y-2.5,10);
+    image(charImage,x+5,y+5,20,20);
   }
 }

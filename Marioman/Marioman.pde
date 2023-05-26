@@ -1,10 +1,12 @@
 levels l;
 int levelNum = 1; // should start at zero, but we'll worry about this when we implement a menu
 pixel[][] map = new pixel[27][27];
-character player = new character();
 int score = 0;
+PImage Mario;
+character player = new character();
 
 void setup(){
+  Mario = loadImage("Mario.png");
   background(0);
   size(810,810);
   int x = 0;
