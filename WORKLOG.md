@@ -15,6 +15,12 @@
   - added movement for our player character — need to figure out ghosts
   - need to figure out the proper arithmetic for proper alignment between the walls
 
+### date: May 25, 2023
+- finally figured out the arithmetic for proper character movement (HOPEFULLY)
+- added in our first character image, which should be easier to implement more for more selection
+- slightly altered our wall designs to make everything symmetric
+- got the wrap around to work (actually this time)
+
 info
 
 
