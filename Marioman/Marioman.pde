@@ -3,10 +3,12 @@ int levelNum = 1; // should start at zero, but we'll worry about this when we im
 pixel[][] map = new pixel[27][27];
 character player = new character();
 int score = 0;
+int countdown;
 
 void setup(){
   background(0);
   size(810,810);
+  countdown = 0;
   int x = 0;
   int y = 0;
   for(int i = 0; i < map.length; i++){ // sections the map into pixels
@@ -36,6 +38,7 @@ void draw(){
     countScore();
     player.display();
   }
+  
   drawScore();
 }
 
@@ -130,6 +133,23 @@ void drawScore(){
   text("SCORE: " + score , 5, 15);
 }
 
+void displayPower(){//need to figure out how to make it last longer
+  if (countdown == 0){
+    countdown += 600;
+  }
+  while (countdown > 0){
+    fill(180,150,40);
+    stroke(255, 215, 80);
+    strokeWeight(3);
+    rect(335, 0, 30, 20);
+    rect(370, 0, 30, 20);
+    rect(405, 0, 30, 20);
+    rect(440, 0, 30, 20);
+    countdown--;
+  }
+  
+}
+
 void countScore(){
   int x = (int) player.x;
   int y = (int) player.y;
@@ -141,14 +161,4 @@ void countScore(){
     displayPower();
     map[y/30][x/30].identifier = pixel.SPACE;
   }
-}
-
-void displayPower(){
-    fill(180,150,40);
-    stroke(255, 215, 80);
-    strokeWeight(3);
-    rect(335, 0, 30, 20);
-    rect(370, 0, 30, 20);
-    rect(405, 0, 30, 20);
-    rect(440, 0, 30, 20);
 }
