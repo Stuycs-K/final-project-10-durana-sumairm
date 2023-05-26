@@ -4,12 +4,19 @@ pixel[][] map = new pixel[27][27];
 int score = 0;
 PImage Mario;
 character player;
+int countdown;
+powerUp pow = new powerUp();
+PImage FIRSTimg;
+PImage SECimg;
+PImage THIRDimg;
+PImage FOURTHimg;
 
 void setup(){
   Mario = loadImage("Mario.png");
   player = new character();
   background(0);
   size(810,810);
+  countdown = 0;
   int x = 0;
   int y = 0;
   for(int i = 0; i < map.length; i++){ // sections the map into pixels
@@ -128,10 +135,29 @@ public void drawBorder(){ // should be moved to each level class later
 
 void drawScore(){
   fill(0);
-  rect(0, 0, 120, 20);
+  rect(0, 0, 110, 20);
   fill(255);
   textSize(15);
   text("SCORE: " + score , 5, 15);
+}
+
+void displayPower(){//need to figure out how to make it last longer
+   pow.shufflePower();
+   fill(180,150,40);
+   stroke(255, 215, 80);
+   strokeWeight(3);
+   rect(335, 0, 30, 20);
+   FIRSTimg = loadImage(pow.getPower(0) + ".png");
+   image(FIRSTimg,343,3,15,15);
+   rect(370, 0, 30, 20);
+   SECimg = loadImage(pow.getPower(1) + ".png");
+   image(SECimg,378,3,15,15);
+   rect(405, 0, 30, 20);
+   THIRDimg = loadImage(pow.getPower(2) + ".png");
+   image(THIRDimg,413,3,15,15);
+   rect(440, 0, 30, 20);
+   FOURTHimg = loadImage(pow.getPower(3) + ".png");
+   image(FOURTHimg,448,3,15,15);  
 }
 
 void countScore(){
@@ -143,6 +169,7 @@ void countScore(){
       map[y/30][x/30].identifier = pixel.SPACE;
     }
     if (map[y/30][x/30].identifier == pixel.POWER){
+      displayPower();
       map[y/30][x/30].identifier = pixel.SPACE;
     }
   }

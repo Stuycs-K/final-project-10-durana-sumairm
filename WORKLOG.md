@@ -35,3 +35,5 @@ info
 ### date: May 25, 2023
 -worked on score counter
 -worked on removing coin once the character eats it
+-worked on powerUp class (powerUps are randomly shuffled and chosen)
+-need to figure out how to make powerUps display stay for a couple of seconds and then disappear
