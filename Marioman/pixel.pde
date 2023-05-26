@@ -14,6 +14,7 @@ public class pixel{
   private static final int rEND = 8;
   private static final int bEND = 9;
   private static final int lEND = 10;
+  private static final int INVISWALL = 100; //for the ghost entrance/exit
   private static final int COIN = -2; // every empty space starts off as a coin (per pacman game)
   private static final int POWER = -3; // scattered in corners of the maps
   private PImage COINimg;
@@ -30,7 +31,7 @@ public class pixel{
     fill(0);
     strokeWeight(1);
     stroke(255);
-    //square(x,y,30); // FOR TESTING PURPOSES, to easily visualize the pixels
+    square(x,y,30); // FOR TESTING PURPOSES, to easily visualize the pixels
     if(identifier == VWALL){
       stroke(#2121DE);
       strokeWeight(1);
@@ -115,6 +116,7 @@ public class pixel{
     }
     if(identifier == POWER){
       POWERimg = loadImage("Power.png");
+      imageMode(CORNER);
       image(POWERimg,x+4.5,y+4.5,20,20);
     }
   }

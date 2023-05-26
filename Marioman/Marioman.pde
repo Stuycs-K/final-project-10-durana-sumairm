@@ -3,10 +3,11 @@ int levelNum = 1; // should start at zero, but we'll worry about this when we im
 pixel[][] map = new pixel[27][27];
 int score = 0;
 PImage Mario;
-character player = new character();
+character player;
 
 void setup(){
   Mario = loadImage("Mario.png");
+  player = new character();
   background(0);
   size(810,810);
   int x = 0;
@@ -37,21 +38,22 @@ void draw(){
     player.move();
     countScore();
     player.display();
+    println(player.x + " " + player.y);
   }
   drawScore();
 }
 
 void keyPressed(){
-      if(keyCode == UP && map[(int)(player.y/30)-1][(int)(player.x/30)].identifier < 0){
+      if((keyCode == UP && map[(int)((player.y-16)/30)][(int)(player.x/30)].identifier < 0) && (player.x%15 == 0)){
         player.direction = 0;
       }
-      if(keyCode == RIGHT && map[(int)(player.y/30)][(int)(player.x/30)+1].identifier < 0){
+      if((keyCode == RIGHT && map[(int)(player.y/30)][(int)((player.x+15)/30)].identifier < 0) && (player.y%15 == 0)){
         player.direction = 1;
       }
-      if(keyCode == DOWN && map[(int)(player.y/30)+1][(int)(player.x/30)].identifier < 0){
+      if((keyCode == DOWN && map[(int)((player.y+15)/30)][(int)(player.x/30)].identifier < 0) && (player.x%15 == 0)){
         player.direction = 2;
       }
-      if(keyCode == LEFT && map[(int)(player.y/30)][(int)(player.x/30)-1].identifier < 0){
+      if((keyCode == LEFT && map[(int)(player.y/30)][(int)((player.x-16)/30)].identifier < 0) && (player.y%15 == 0)){
         player.direction = 3;
       }
   }
@@ -116,12 +118,12 @@ public void drawBorder(){ // should be moved to each level class later
     map[i][26].identifier = pixel.VWALL;
   }
   // wraparound areas
-  map[13][0].identifier = pixel.BRCORNER;
-  map[14][0].identifier = pixel.SPACE;
-  map[15][0].identifier = pixel.TRCORNER;
-  map[13][26].identifier = pixel.BLCORNER;
-  map[14][26].identifier = pixel.SPACE;
-  map[15][26].identifier = pixel.TLCORNER;
+  map[12][0].identifier = pixel.BRCORNER;
+  map[13][0].identifier = pixel.SPACE;
+  map[14][0].identifier = pixel.TRCORNER;
+  map[12][26].identifier = pixel.BLCORNER;
+  map[13][26].identifier = pixel.SPACE;
+  map[14][26].identifier = pixel.TLCORNER;
 }
 
 void drawScore(){
@@ -135,11 +137,13 @@ void drawScore(){
 void countScore(){
   int x = (int) player.x;
   int y = (int) player.y;
-  if (map[y/30][x/30].identifier == pixel.COIN){
-    score += 10;
-    map[y/30][x/30].identifier = pixel.SPACE;
-  }
-  if (map[y/30][x/30].identifier == pixel.POWER){
-    map[y/30][x/30].identifier = pixel.SPACE;
+  if((x>0 && y>0) && (x < 810)){
+    if (map[y/30][x/30].identifier == pixel.COIN){
+      score += 10;
+      map[y/30][x/30].identifier = pixel.SPACE;
+    }
+    if (map[y/30][x/30].identifier == pixel.POWER){
+      map[y/30][x/30].identifier = pixel.SPACE;
+    }
   }
 }
