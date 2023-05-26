@@ -51,19 +51,21 @@ void draw(){
 }
 
 void keyPressed(){
-      if((keyCode == UP && map[(int)((player.y-16)/30)][(int)(player.x/30)].identifier < 0) && (player.x%15 == 0)){
-        player.direction = 0;
-      }
-      if((keyCode == RIGHT && map[(int)(player.y/30)][(int)((player.x+15)/30)].identifier < 0) && (player.y%15 == 0)){
-        player.direction = 1;
-      }
-      if((keyCode == DOWN && map[(int)((player.y+15)/30)][(int)(player.x/30)].identifier < 0) && (player.x%15 == 0)){
-        player.direction = 2;
-      }
-      if((keyCode == LEFT && map[(int)(player.y/30)][(int)((player.x-16)/30)].identifier < 0) && (player.y%15 == 0)){
-        player.direction = 3;
-      }
+  if((player.x+15) < 810 && (player.x-16) > 0){
+    if((keyCode == UP && map[((player.y-16)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
+      player.direction = 0;
+    }
+    if((keyCode == RIGHT && map[(player.y/30)][((player.x+15)/30)].identifier < 0) && (player.y%15 == 0)){
+      player.direction = 1;
+    }
+    if((keyCode == DOWN && map[((player.y+15)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
+      player.direction = 2;
+    }
+    if((keyCode == LEFT && map[(player.y/30)][((player.x-16)/30)].identifier < 0) && (player.y%15 == 0)){
+      player.direction = 3;
+    }
   }
+}
   
 
 //=============================== MAZE DRAWING METHODS
