@@ -16,7 +16,10 @@ void setup(){
   player = new character();
   background(0);
   size(810,810);
+  
   countdown = 0;
+  pow.shufflePower();
+  
   int x = 0;
   int y = 0;
   for(int i = 0; i < map.length; i++){ // sections the map into pixels
@@ -45,7 +48,10 @@ void draw(){
     player.move();
     countScore();
     player.display();
-    println(player.x + " " + player.y);
+    if (countdown > 0){
+      displayPower();
+      countdown--;
+    }
   }
   drawScore();
 }
@@ -142,22 +148,21 @@ void drawScore(){
 }
 
 void displayPower(){//need to figure out how to make it last longer
-   pow.shufflePower();
    fill(180,150,40);
    stroke(255, 215, 80);
    strokeWeight(3);
    rect(335, 0, 30, 20);
    FIRSTimg = loadImage(pow.getPower(0) + ".png");
-   image(FIRSTimg,343,3,15,15);
+   image(FIRSTimg,345,5,15,15);
    rect(370, 0, 30, 20);
    SECimg = loadImage(pow.getPower(1) + ".png");
-   image(SECimg,378,3,15,15);
+   image(SECimg,380,5,15,15);
    rect(405, 0, 30, 20);
    THIRDimg = loadImage(pow.getPower(2) + ".png");
-   image(THIRDimg,413,3,15,15);
+   image(THIRDimg,415,5,15,15);
    rect(440, 0, 30, 20);
    FOURTHimg = loadImage(pow.getPower(3) + ".png");
-   image(FOURTHimg,448,3,15,15);  
+   image(FOURTHimg,450,5,15,15);  
 }
 
 void countScore(){
@@ -168,8 +173,8 @@ void countScore(){
       score += 10;
       map[y/30][x/30].identifier = pixel.SPACE;
     }
-    if (map[y/30][x/30].identifier == pixel.POWER){
-      displayPower();
+    if (map[y/30][x/30].identifier == pixel.POWER){  
+      countdown += 90;
       map[y/30][x/30].identifier = pixel.SPACE;
     }
   }
