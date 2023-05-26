@@ -1,3 +1,4 @@
+boolean playing = false;
 levels l;
 int levelNum = 1; // should start at zero, but we'll worry about this when we implement a menu
 pixel[][] map = new pixel[27][27];
@@ -10,12 +11,21 @@ PImage FIRSTimg;
 PImage SECimg;
 PImage THIRDimg;
 PImage FOURTHimg;
+PFont pacman;
 
 void setup(){
+  //load all char images (add more later)
   Mario = loadImage("Mario.png");
+  
+  //load fonts
+  pacman = createFont("CrackMan.otf",200);
+  
   player = new character();
   background(0);
   size(810,810);
+  textAlign(CENTER);
+  textSize(100);
+  text("MARIO-MAN",200,200);
   countdown = 0;
   int x = 0;
   int y = 0;
@@ -28,14 +38,16 @@ void setup(){
     y+=30;
   }
   
-  // will be moved somewhere else soon
-  drawMaze();
-  drawBorder();
-  drawGhostSpawn();
+  if(playing == true){
+    background(0);
+    drawMaze();
+    drawBorder();
+    drawGhostSpawn();
+  }
 }
 
 void draw(){
-  if(levelNum != 0){
+  if(playing){
     background(0);
     for(int i = 0; i < map.length; i++){
       for(int j = 0; j < map[0].length; j++){
@@ -46,8 +58,8 @@ void draw(){
     countScore();
     player.display();
     println(player.x + " " + player.y);
+    drawScore();
   }
-  drawScore();
 }
 
 void keyPressed(){
