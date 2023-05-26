@@ -4,6 +4,11 @@ pixel[][] map = new pixel[27][27];
 character player = new character();
 int score = 0;
 int countdown;
+powerUp pow = new powerUp();
+PImage FIRSTimg;
+PImage SECimg;
+PImage THIRDimg;
+PImage FOURTHimg;
 
 void setup(){
   background(0);
@@ -38,7 +43,6 @@ void draw(){
     countScore();
     player.display();
   }
-  
   drawScore();
 }
 
@@ -134,20 +138,22 @@ void drawScore(){
 }
 
 void displayPower(){//need to figure out how to make it last longer
-  if (countdown == 0){
-    countdown += 600;
-  }
-  while (countdown > 0){
-    fill(180,150,40);
-    stroke(255, 215, 80);
-    strokeWeight(3);
-    rect(335, 0, 30, 20);
-    rect(370, 0, 30, 20);
-    rect(405, 0, 30, 20);
-    rect(440, 0, 30, 20);
-    countdown--;
-  }
-  
+   pow.shufflePower();
+   fill(180,150,40);
+   stroke(255, 215, 80);
+   strokeWeight(3);
+   rect(335, 0, 30, 20);
+   FIRSTimg = loadImage(pow.getPower(0) + ".png");
+   image(FIRSTimg,343,3,15,15);
+   rect(370, 0, 30, 20);
+   SECimg = loadImage(pow.getPower(1) + ".png");
+   image(SECimg,378,3,15,15);
+   rect(405, 0, 30, 20);
+   THIRDimg = loadImage(pow.getPower(2) + ".png");
+   image(THIRDimg,413,3,15,15);
+   rect(440, 0, 30, 20);
+   FOURTHimg = loadImage(pow.getPower(3) + ".png");
+   image(FOURTHimg,448,3,15,15);  
 }
 
 void countScore(){
