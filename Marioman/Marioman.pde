@@ -151,18 +151,20 @@ void displayPower(){//need to figure out how to make it last longer
    fill(180,150,40);
    stroke(255, 215, 80);
    strokeWeight(3);
-   rect(335, 0, 30, 20);
+   rect(285, 390, 50, 50);
    FIRSTimg = loadImage(pow.getPower(0) + ".png");
-   image(FIRSTimg,345,5,15,15);
-   rect(370, 0, 30, 20);
+   image(FIRSTimg,310,415,40,40);
+   fill(35,10,135);
+   stroke(115, 80, 255);
+   rect(345, 390, 50, 50);
    SECimg = loadImage(pow.getPower(1) + ".png");
-   image(SECimg,380,5,15,15);
-   rect(405, 0, 30, 20);
+   image(SECimg,370,415,40,40);
+   rect(405, 390, 50, 50);
    THIRDimg = loadImage(pow.getPower(2) + ".png");
-   image(THIRDimg,415,5,15,15);
-   rect(440, 0, 30, 20);
+   image(THIRDimg,430,415,40,40);
+   rect(465, 390, 50, 50);
    FOURTHimg = loadImage(pow.getPower(3) + ".png");
-   image(FOURTHimg,450,5,15,15);  
+   image(FOURTHimg,490,415,40,40);  
 }
 
 void countScore(){
@@ -175,6 +177,7 @@ void countScore(){
     }
     if (map[y/30][x/30].identifier == pixel.POWER){  
       countdown += 90;
+      pow.shufflePower();
       map[y/30][x/30].identifier = pixel.SPACE;
     }
   }
