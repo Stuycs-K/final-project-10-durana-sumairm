@@ -124,7 +124,7 @@ public void drawBorder(){ // should be moved to each level class later
 
 void drawScore(){
   fill(0);
-  rect(0, 0, 120, 20);
+  rect(0, 0, 110, 20);
   fill(255);
   textSize(15);
   text("SCORE: " + score , 5, 15);
@@ -138,6 +138,17 @@ void countScore(){
     map[y/30][x/30].identifier = pixel.SPACE;
   }
   if (map[y/30][x/30].identifier == pixel.POWER){
+    displayPower();
     map[y/30][x/30].identifier = pixel.SPACE;
   }
+}
+
+void displayPower(){
+    fill(180,150,40);
+    stroke(255, 215, 80);
+    strokeWeight(3);
+    rect(335, 0, 30, 20);
+    rect(370, 0, 30, 20);
+    rect(405, 0, 30, 20);
+    rect(440, 0, 30, 20);
 }
