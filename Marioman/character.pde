@@ -10,6 +10,7 @@ public class character{
     direction = 1;
   }
   
+  
   public void move(){
     if(x<0 || x>=790){
       x+=directions[direction][0];
