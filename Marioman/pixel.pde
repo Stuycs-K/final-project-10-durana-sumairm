@@ -31,7 +31,7 @@ public class pixel{
     fill(0);
     strokeWeight(1);
     stroke(255);
-    square(x,y,30); // FOR TESTING PURPOSES, to easily visualize the pixels
+    //square(x,y,30); // FOR TESTING PURPOSES, to easily visualize the pixels
     if(identifier == VWALL){
       stroke(#2121DE);
       strokeWeight(1);
