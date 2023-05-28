@@ -1,4 +1,5 @@
 boolean playing = false;
+boolean levelSelection = false;
 levels l;
 int levelNum = 1; // should start at zero, but we'll worry about this when we implement a menu
 pixel[][] map = new pixel[27][27];
@@ -12,20 +13,20 @@ PImage SECimg;
 PImage THIRDimg;
 PImage FOURTHimg;
 PFont pacman;
+PFont pixelFont;
 
 void setup(){
   //load all char images (add more later)
   Mario = loadImage("Mario.png");
   
   //load fonts
-  pacman = createFont("CrackMan.otf",200);
+  pacman = createFont("CrackMan.otf",100);
+  pixelFont = createFont("PixelFont.otf",100);
   
-  player = new character();
-  background(0);
+  drawMainMenu();
+  
+  //player = new character();
   size(810,810);
-  textAlign(CENTER);
-  textSize(100);
-  text("MARIO-MAN",200,200);
   countdown = 0;
   int x = 0;
   int y = 0;
@@ -38,7 +39,7 @@ void setup(){
     y+=30;
   }
   
-  if(playing == true){
+  if(playing){
     background(0);
     drawMaze();
     drawBorder();
@@ -62,19 +63,40 @@ void draw(){
   }
 }
 
+public void drawMainMenu(){
+  background(0);
+  textFont(pacman);
+  textSize(100);
+  fill(#FFFF00);
+  textAlign(CENTER);
+  text("MARIO-MAN",400,405);
+  rectMode(CENTER);
+  rect(250,460,260,50);
+  rect(560,460,260,50);
+  textAlign(CENTER,CENTER);
+  textFont(pixelFont);
+  textSize(20);
+  fill(0);
+  text("PLAY",250,460);
+  textSize(10);
+  text("CHARACTER\nCUSTOMIZATION",560,460);
+}
+
 void keyPressed(){
-  if((player.x+15) < 810 && (player.x-16) > 0){
-    if((keyCode == UP && map[((player.y-16)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
-      player.direction = 0;
-    }
-    if((keyCode == RIGHT && map[(player.y/30)][((player.x+15)/30)].identifier < 0) && (player.y%15 == 0)){
-      player.direction = 1;
-    }
-    if((keyCode == DOWN && map[((player.y+15)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
-      player.direction = 2;
-    }
-    if((keyCode == LEFT && map[(player.y/30)][((player.x-16)/30)].identifier < 0) && (player.y%15 == 0)){
-      player.direction = 3;
+  if(playing){
+    if((player.x+15) < 810 && (player.x-16) > 0){
+      if((keyCode == UP && map[((player.y-16)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
+        player.direction = 0;
+      }
+      if((keyCode == RIGHT && map[(player.y/30)][((player.x+15)/30)].identifier < 0) && (player.y%15 == 0)){
+        player.direction = 1;
+      }
+      if((keyCode == DOWN && map[((player.y+15)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
+        player.direction = 2;
+      }
+      if((keyCode == LEFT && map[(player.y/30)][((player.x-16)/30)].identifier < 0) && (player.y%15 == 0)){
+        player.direction = 3;
+      }
     }
   }
 }
