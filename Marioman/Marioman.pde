@@ -1,28 +1,33 @@
+//menus
+boolean mainMenu = true;
 boolean playing = false;
 boolean levelSelection = false;
+boolean characterSelection = false;
+
+//levels
 levels l;
 int levelNum = 1; // should start at zero, but we'll worry about this when we implement a menu
 pixel[][] map = new pixel[27][27];
 int score = 0;
-PImage Mario;
+//character stuff
 character player;
+String character = "Mario";
+//power-ups
 int countdown;
 powerUp pow = new powerUp();
 PImage FIRSTimg;
 PImage SECimg;
 PImage THIRDimg;
 PImage FOURTHimg;
+//fonts
 PFont pacman;
 PFont pixelFont;
 
 void setup(){
-  //load all char images (add more later)
-  Mario = loadImage("Mario.png");
-  
   //load fonts
   pacman = createFont("CrackMan.otf",100);
   pixelFont = createFont("PixelFont.otf",100);
-  
+  //begin w/ main menu
   drawMainMenu();
   
   //player = new character();
@@ -48,6 +53,16 @@ void setup(){
 }
 
 void draw(){
+  background(0);
+  if(mainMenu){
+    drawMainMenu();
+  }
+  if(levelSelection){
+    drawLevelMenu();
+  }
+  if(characterSelection){
+    background(100);
+  }
   if(playing){
     background(0);
     for(int i = 0; i < map.length; i++){
@@ -64,7 +79,6 @@ void draw(){
 }
 
 public void drawMainMenu(){
-  background(0);
   textFont(pacman);
   textSize(100);
   fill(#FFFF00);
@@ -73,6 +87,7 @@ public void drawMainMenu(){
   rectMode(CENTER);
   rect(250,460,260,50);
   rect(560,460,260,50);
+  rectMode(CORNER);
   textAlign(CENTER,CENTER);
   textFont(pixelFont);
   textSize(20);
@@ -80,6 +95,69 @@ public void drawMainMenu(){
   text("PLAY",250,460);
   textSize(10);
   text("CHARACTER\nCUSTOMIZATION",560,460);
+  textAlign(LEFT,BASELINE);
+}
+
+public void drawLevelMenu(){
+  textFont(pixelFont);
+  textAlign(CENTER,CENTER);
+  textSize(15);
+  rectMode(CENTER);
+  int num = 1;
+  for(int x = 100;  x < 810; x+= 151){
+    fill(#FFFF00);
+    rect(x,350,140,40);
+    fill(0);
+    text("LEVEL " + num,x,350);
+    num++;
+  }
+  for(int x = 100;  x < 810; x+= 151){
+    fill(#FFFF00);
+    rect(x,410,140,40);
+    fill(0);
+    text("LEVEL " + num,x,410);
+    num++;
+  }
+  fill(#f3cf34);
+  rect(405,480,140,40);
+  fill(0);
+  text("BACK",405,480);
+  rectMode(CORNER);
+  textAlign(LEFT,BASELINE);
+}
+
+void mouseClicked(){
+  if(mainMenu){
+    if((mouseX >= 120 && mouseX <= 380) && (mouseY >= 435 && mouseY <= 485)){
+      mainMenu = false;
+      levelSelection = true;
+    }
+    if((mouseX >= 430 && mouseX <= 690) && (mouseY >= 435 && mouseY <= 485)){
+      mainMenu = false;
+      characterSelection = true;
+    }
+  }
+  if(levelSelection){
+    drawBorder();
+    if(mouseX >= 30 && mouseX <= 170){
+      if(mouseY >= 330 && mouseY <= 370){
+        levelNum = 1;
+        drawMaze();
+        drawGhostSpawn();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+      if(mouseY >= 390 && mouseY <= 430){
+        levelNum = 6;
+        drawMaze();
+        drawGhostSpawn();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+    }
+  }
 }
 
 void keyPressed(){
