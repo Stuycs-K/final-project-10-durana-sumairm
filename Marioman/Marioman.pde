@@ -10,13 +10,31 @@ PImage FIRSTimg;
 PImage SECimg;
 PImage THIRDimg;
 PImage FOURTHimg;
+PImage Bowser;
+ghost g1;
+PImage KingBoo;
+ghost g2;
+PImage Wario;
+ghost g3;
+PImage Waluigi;
+ghost g4;
 
 void setup(){
-  Mario = loadImage("Mario.png");
+  Mario = loadImage("Mario.png");  
   player = new character();
+  
+  Bowser = loadImage("Bowser.png");
+  g1 = new ghost(350,410, Bowser);
+  KingBoo = loadImage("KingBoo.png");
+  g2 = new ghost(390,410, KingBoo);
+  Wario = loadImage("Wario.png");
+  g3 = new ghost(460,410, Wario);
+  Waluigi = loadImage("Waluigi.png");
+  g4 = new ghost(425, 410, Waluigi);
+  
   background(0);
   size(810,810);
-  
+ 
   countdown = 0;
   pow.shufflePower();
   
@@ -48,6 +66,10 @@ void draw(){
     player.move();
     countScore();
     player.display();
+    g1.display();
+    g2.display();
+    g3.display();
+    g4.display();
     if (countdown > 0){
       displayPower();
       countdown--;
