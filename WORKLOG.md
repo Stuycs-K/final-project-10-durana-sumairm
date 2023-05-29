@@ -48,3 +48,12 @@
 - worked on removing coin once the character eats it
 - worked on powerUp class (powerUps are randomly shuffled and chosen)
 - need to figure out how to make powerUps display stay for a couple of seconds and then disappear
+
+### date: May 26, 2023
+- fixed the display for powerUps
+
+### date: May 27, 2023
+- no work done
+
+### date: May 28, 2023
+- worked on ghost class display and will work on more levels

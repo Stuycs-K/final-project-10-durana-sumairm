@@ -1,5 +1,5 @@
 levels l;
-int levelNum = 1; // should start at zero, but we'll worry about this when we implement a menu
+int levelNum = 2; // should start at zero, but we'll worry about this when we implement a menu
 pixel[][] map = new pixel[27][27];
 int score = 0;
 PImage Mario;
@@ -10,13 +10,34 @@ PImage FIRSTimg;
 PImage SECimg;
 PImage THIRDimg;
 PImage FOURTHimg;
+PImage Bowser;
+ghost g1;
+PImage KingBoo;
+ghost g2;
+PImage Wario;
+ghost g3;
+PImage Waluigi;
+ghost g4;
 
 void setup(){
-  Mario = loadImage("Mario.png");
+  Mario = loadImage("Mario.png");  
   player = new character();
+  
+  Bowser = loadImage("Bowser.png");
+  g1 = new ghost(350,410, Bowser);
+  KingBoo = loadImage("KingBoo.png");
+  g2 = new ghost(390,410, KingBoo);
+  Wario = loadImage("Wario.png");
+  g3 = new ghost(460,410, Wario);
+  Waluigi = loadImage("Waluigi.png");
+  g4 = new ghost(425, 410, Waluigi);
+  
   background(0);
   size(810,810);
+ 
   countdown = 0;
+  pow.shufflePower();
+  
   int x = 0;
   int y = 0;
   for(int i = 0; i < map.length; i++){ // sections the map into pixels
@@ -45,7 +66,14 @@ void draw(){
     player.move();
     countScore();
     player.display();
-    println(player.x + " " + player.y);
+    g1.display();
+    g2.display();
+    g3.display();
+    g4.display();
+    if (countdown > 0){
+      displayPower();
+      countdown--;
+    }
   }
   drawScore();
 }
@@ -144,22 +172,23 @@ void drawScore(){
 }
 
 void displayPower(){//need to figure out how to make it last longer
-   pow.shufflePower();
    fill(180,150,40);
    stroke(255, 215, 80);
    strokeWeight(3);
-   rect(335, 0, 30, 20);
+   rect(285, 390, 50, 50);
    FIRSTimg = loadImage(pow.getPower(0) + ".png");
-   image(FIRSTimg,343,3,15,15);
-   rect(370, 0, 30, 20);
+   image(FIRSTimg,310,415,40,40);
+   fill(35,10,135);
+   stroke(115, 80, 255);
+   rect(345, 390, 50, 50);
    SECimg = loadImage(pow.getPower(1) + ".png");
-   image(SECimg,378,3,15,15);
-   rect(405, 0, 30, 20);
+   image(SECimg,370,415,40,40);
+   rect(405, 390, 50, 50);
    THIRDimg = loadImage(pow.getPower(2) + ".png");
-   image(THIRDimg,413,3,15,15);
-   rect(440, 0, 30, 20);
+   image(THIRDimg,430,415,40,40);
+   rect(465, 390, 50, 50);
    FOURTHimg = loadImage(pow.getPower(3) + ".png");
-   image(FOURTHimg,448,3,15,15);  
+   image(FOURTHimg,490,415,40,40);  
 }
 
 void countScore(){
@@ -170,8 +199,9 @@ void countScore(){
       score += 10;
       map[y/30][x/30].identifier = pixel.SPACE;
     }
-    if (map[y/30][x/30].identifier == pixel.POWER){
-      displayPower();
+    if (map[y/30][x/30].identifier == pixel.POWER){  
+      countdown += 90;
+      pow.shufflePower();
       map[y/30][x/30].identifier = pixel.SPACE;
     }
   }
