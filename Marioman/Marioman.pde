@@ -6,7 +6,7 @@ boolean characterSelection = false;
 
 //levels
 levels l;
-int levelNum = 1; // should start at zero, but we'll worry about this when we implement a menu
+int levelNum = 1;
 pixel[][] map = new pixel[27][27];
 int score = 0;
 //character stuff
@@ -29,8 +29,7 @@ void setup(){
   pixelFont = createFont("PixelFont.otf",100);
   //begin w/ main menu
   drawMainMenu();
-  
-  //player = new character();
+
   size(810,810);
   countdown = 0;
   int x = 0;
@@ -61,7 +60,7 @@ void draw(){
     drawLevelMenu();
   }
   if(characterSelection){
-    background(100);
+    drawCharacterMenu();
   }
   if(playing){
     background(0);
@@ -73,10 +72,12 @@ void draw(){
     player.move();
     countScore();
     player.display();
-    println(player.x + " " + player.y);
     drawScore();
   }
 }
+
+
+//=============================== MENU DRAWING METHODS
 
 public void drawMainMenu(){
   textFont(pacman);
@@ -126,6 +127,51 @@ public void drawLevelMenu(){
   textAlign(LEFT,BASELINE);
 }
 
+public void drawCharacterMenu(){
+  PImage Mario;
+  PImage PrincessPeach;
+  Mario = loadImage("Mario.png");
+  PrincessPeach = loadImage("PrincessPeach.png");
+  imageMode(CENTER);
+  textAlign(CENTER,CENTER);
+  fill(255);
+  textSize(10);
+  if(character.equals("Mario")){
+    rectMode(CENTER);
+    fill(0);
+    stroke(#2121DE);
+    strokeWeight(4);
+    square(200,350,65);
+    rectMode(CORNER);
+  }
+  image(Mario,200,350,60,60);
+  fill(255);
+  text("Mario",200,400);
+  if(character.equals("PrincessPeach")){
+    rectMode(CENTER);
+    fill(0);
+    stroke(#2121DE);
+    strokeWeight(4);
+    square(300,350,65);
+    rectMode(CORNER);
+  }
+  image(PrincessPeach,300,350,60,60);
+  fill(255);
+  text("Princess\nPeach",300,400);
+  fill(#f3cf34);
+  noStroke();
+  rectMode(CENTER);
+  rect(405,480,140,40);
+  rectMode(CORNER);
+  fill(0);
+  text("BACK",405,480);
+  imageMode(CORNER);
+  textAlign(LEFT,BASELINE);
+}
+
+
+//=============================== MENU FUNCTIONALITY & PLAYER CONTROLS
+
 void mouseClicked(){
   if(mainMenu){
     if((mouseX >= 120 && mouseX <= 380) && (mouseY >= 435 && mouseY <= 485)){
@@ -156,6 +202,24 @@ void mouseClicked(){
         playing = true;
         player = new character(character);
       }
+    }
+    if((mouseX >= 335 && mouseX <= 475) && (mouseY >= 460 && mouseY <= 500)){ // back button
+      levelSelection = false;
+      mainMenu = true;
+    }
+  }
+  if(characterSelection){
+    if(mouseY >= 290 && mouseY <= 410){
+      if(mouseX >= 140 && mouseX <= 260){
+        character = "Mario";
+      }
+      if(mouseX >= 240 && mouseX <= 360){
+        character = "PrincessPeach";
+      }
+    }
+    if((mouseX >= 335 && mouseX <= 475) && (mouseY >= 460 && mouseY <= 500)){ // back button
+      characterSelection = false;
+      mainMenu = true;
     }
   }
 }
@@ -249,10 +313,11 @@ public void drawBorder(){ // should be moved to each level class later
 
 void drawScore(){
   fill(0);
-  rect(0, 0, 110, 20);
+  rect(0, 0, 200, 20);
   fill(255);
-  textSize(15);
-  text("SCORE: " + score , 5, 15);
+  textFont(pixelFont);
+  textSize(14);
+  text("SCORE: " + score , 5, 16);
 }
 
 void displayPower(){//need to figure out how to make it last longer
