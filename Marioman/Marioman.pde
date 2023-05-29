@@ -1,22 +1,59 @@
+//menus
+boolean mainMenu = true;
+boolean playing = false;
+boolean levelSelection = false;
+boolean characterSelection = false;
+
+//levels
 levels l;
-int levelNum = 1; // should start at zero, but we'll worry about this when we implement a menu
+int levelNum = 1;
 pixel[][] map = new pixel[27][27];
 int score = 0;
-PImage Mario;
+//character stuff
 character player;
+PImage Bowser;
+ghost g1;
+PImage KingBoo;
+ghost g2;
+PImage Wario;
+ghost g3;
+PImage Waluigi;
+ghost g4;
+String character = "Mario";
+//power-ups
 int countdown;
 powerUp pow = new powerUp();
 PImage FIRSTimg;
 PImage SECimg;
 PImage THIRDimg;
 PImage FOURTHimg;
+//fonts
+PFont pacman;
+PFont pixelFont;
 
 void setup(){
-  Mario = loadImage("Mario.png");
-  player = new character();
-  background(0);
+  //load fonts
+  pacman = createFont("CrackMan.otf",100);
+  pixelFont = createFont("PixelFont.otf",100);
+  
+  //begin w/ main menu
+  drawMainMenu();
+  
+  //load enemies
+  Bowser = loadImage("Bowser.png");
+  g1 = new ghost(350,410, Bowser);
+  KingBoo = loadImage("KingBoo.png");
+  g2 = new ghost(390,410, KingBoo);
+  Wario = loadImage("Wario.png");
+  g3 = new ghost(460,410, Wario);
+  Waluigi = loadImage("Waluigi.png");
+  g4 = new ghost(425, 410, Waluigi);
+  
   size(810,810);
+ 
   countdown = 0;
+  pow.shufflePower();
+  
   int x = 0;
   int y = 0;
   for(int i = 0; i < map.length; i++){ // sections the map into pixels
@@ -27,15 +64,20 @@ void setup(){
     x = 0;
     y+=30;
   }
-  
-  // will be moved somewhere else soon
-  drawMaze();
-  drawBorder();
-  drawGhostSpawn();
 }
 
 void draw(){
-  if(levelNum != 0){
+  background(0);
+  if(mainMenu){
+    drawMainMenu();
+  }
+  if(levelSelection){
+    drawLevelMenu();
+  }
+  if(characterSelection){
+    drawCharacterMenu();
+  }
+  if(playing){
     background(0);
     for(int i = 0; i < map.length; i++){
       for(int j = 0; j < map[0].length; j++){
@@ -45,24 +87,199 @@ void draw(){
     player.move();
     countScore();
     player.display();
-    println(player.x + " " + player.y);
+    drawScore();
+    g1.display();
+    g2.display();
+    g3.display();
+    g4.display();
+    if (countdown > 0){
+      displayPower();
+      countdown--;
+    }
   }
-  drawScore();
+}
+
+
+//=============================== MENU DRAWING METHODS
+
+public void drawMainMenu(){
+  textFont(pacman);
+  textSize(100);
+  fill(#FFFF00);
+  textAlign(CENTER);
+  text("MARIO-MAN",400,405);
+  rectMode(CENTER);
+  rect(250,460,260,50);
+  rect(560,460,260,50);
+  rectMode(CORNER);
+  textAlign(CENTER,CENTER);
+  textFont(pixelFont);
+  textSize(20);
+  fill(0);
+  text("PLAY",250,460);
+  textSize(10);
+  text("CHARACTER\nCUSTOMIZATION",560,460);
+  textAlign(LEFT,BASELINE);
+}
+
+public void drawLevelMenu(){
+  textFont(pixelFont);
+  textAlign(CENTER,CENTER);
+  textSize(15);
+  rectMode(CENTER);
+  int num = 1;
+  for(int x = 100;  x < 810; x+= 151){
+    fill(#FFFF00);
+    rect(x,350,140,40);
+    fill(0);
+    text("LEVEL " + num,x,350);
+    num++;
+  }
+  for(int x = 100;  x < 810; x+= 151){
+    fill(#FFFF00);
+    rect(x,410,140,40);
+    fill(0);
+    text("LEVEL " + num,x,410);
+    num++;
+  }
+  fill(#f3cf34);
+  rect(405,480,140,40);
+  fill(0);
+  text("BACK",405,480);
+  rectMode(CORNER);
+  textAlign(LEFT,BASELINE);
+}
+
+public void drawCharacterMenu(){
+  PImage Mario;
+  PImage PrincessPeach;
+  Mario = loadImage("Mario.png");
+  PrincessPeach = loadImage("PrincessPeach.png");
+  imageMode(CENTER);
+  textAlign(CENTER,CENTER);
+  fill(255);
+  textSize(10);
+  if(character.equals("Mario")){
+    rectMode(CENTER);
+    fill(0);
+    stroke(#2121DE);
+    strokeWeight(4);
+    square(200,350,65);
+    rectMode(CORNER);
+  }
+  image(Mario,200,350,60,60);
+  fill(255);
+  text("Mario",200,400);
+  if(character.equals("PrincessPeach")){
+    rectMode(CENTER);
+    fill(0);
+    stroke(#2121DE);
+    strokeWeight(4);
+    square(300,350,65);
+    rectMode(CORNER);
+  }
+  image(PrincessPeach,300,350,60,60);
+  fill(255);
+  text("Princess\nPeach",300,400);
+  fill(#f3cf34);
+  noStroke();
+  rectMode(CENTER);
+  rect(405,480,140,40);
+  rectMode(CORNER);
+  fill(0);
+  text("BACK",405,480);
+  imageMode(CORNER);
+  textAlign(LEFT,BASELINE);
+}
+
+
+//=============================== MENU FUNCTIONALITY & PLAYER CONTROLS
+
+void mouseClicked(){
+  if(mainMenu){
+    if((mouseX >= 120 && mouseX <= 380) && (mouseY >= 435 && mouseY <= 485)){
+      mainMenu = false;
+      levelSelection = true;
+    }
+    if((mouseX >= 430 && mouseX <= 690) && (mouseY >= 435 && mouseY <= 485)){
+      mainMenu = false;
+      characterSelection = true;
+    }
+  }
+  if(levelSelection){
+    drawBorder();
+    if(mouseX >= 30 && mouseX <= 170){
+      if(mouseY >= 330 && mouseY <= 370){
+        levelNum = 1;
+        drawMaze();
+        drawGhostSpawn();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+      if(mouseY >= 390 && mouseY <= 430){
+        levelNum = 6;
+        drawMaze();
+        drawGhostSpawn();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+    }
+    if(mouseX >= 181 && mouseX <= 321){
+      if(mouseY >= 330 && mouseY <= 370){
+        levelNum = 2;
+        drawMaze();
+        drawGhostSpawn();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+      if(mouseY >= 390 && mouseY <= 430){
+        levelNum = 7;
+        drawMaze();
+        drawGhostSpawn();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+    }
+    if((mouseX >= 335 && mouseX <= 475) && (mouseY >= 460 && mouseY <= 500)){ // back button
+      levelSelection = false;
+      mainMenu = true;
+    }
+  }
+  if(characterSelection){
+    if(mouseY >= 290 && mouseY <= 410){
+      if(mouseX >= 140 && mouseX <= 260){
+        character = "Mario";
+      }
+      if(mouseX >= 240 && mouseX <= 360){
+        character = "PrincessPeach";
+      }
+    }
+    if((mouseX >= 335 && mouseX <= 475) && (mouseY >= 460 && mouseY <= 500)){ // back button
+      characterSelection = false;
+      mainMenu = true;
+    }
+  }
 }
 
 void keyPressed(){
-  if((player.x+15) < 810 && (player.x-16) > 0){
-    if((keyCode == UP && map[((player.y-16)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
-      player.direction = 0;
-    }
-    if((keyCode == RIGHT && map[(player.y/30)][((player.x+15)/30)].identifier < 0) && (player.y%15 == 0)){
-      player.direction = 1;
-    }
-    if((keyCode == DOWN && map[((player.y+15)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
-      player.direction = 2;
-    }
-    if((keyCode == LEFT && map[(player.y/30)][((player.x-16)/30)].identifier < 0) && (player.y%15 == 0)){
-      player.direction = 3;
+  if(playing){
+    if((player.x+15) < 810 && (player.x-16) > 0){
+      if((keyCode == UP && map[((player.y-16)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
+        player.direction = 0;
+      }
+      if((keyCode == RIGHT && map[(player.y/30)][((player.x+15)/30)].identifier < 0) && (player.y%15 == 0)){
+        player.direction = 1;
+      }
+      if((keyCode == DOWN && map[((player.y+15)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
+        player.direction = 2;
+      }
+      if((keyCode == LEFT && map[(player.y/30)][((player.x-16)/30)].identifier < 0) && (player.y%15 == 0)){
+        player.direction = 3;
+      }
     }
   }
 }
@@ -101,7 +318,7 @@ public void drawGhostSpawn(){
   map[13][10].identifier = pixel.VWALL;
 }
 
-public void drawBorder(){ // should be moved to each level class later
+public void drawBorder(){
   for(int i = 0; i < map[0].length; i++){
     if(i == 0){
       map[0][i].identifier = pixel.TLCORNER;
@@ -137,29 +354,31 @@ public void drawBorder(){ // should be moved to each level class later
 
 void drawScore(){
   fill(0);
-  rect(0, 0, 110, 20);
+  rect(0, 0, 200, 20);
   fill(255);
-  textSize(15);
-  text("SCORE: " + score , 5, 15);
+  textFont(pixelFont);
+  textSize(14);
+  text("SCORE: " + score , 5, 16);
 }
 
 void displayPower(){//need to figure out how to make it last longer
-   pow.shufflePower();
    fill(180,150,40);
    stroke(255, 215, 80);
    strokeWeight(3);
-   rect(335, 0, 30, 20);
+   rect(285, 390, 50, 50);
    FIRSTimg = loadImage(pow.getPower(0) + ".png");
-   image(FIRSTimg,343,3,15,15);
-   rect(370, 0, 30, 20);
+   image(FIRSTimg,310,415,40,40);
+   fill(35,10,135);
+   stroke(115, 80, 255);
+   rect(345, 390, 50, 50);
    SECimg = loadImage(pow.getPower(1) + ".png");
-   image(SECimg,378,3,15,15);
-   rect(405, 0, 30, 20);
+   image(SECimg,370,415,40,40);
+   rect(405, 390, 50, 50);
    THIRDimg = loadImage(pow.getPower(2) + ".png");
-   image(THIRDimg,413,3,15,15);
-   rect(440, 0, 30, 20);
+   image(THIRDimg,430,415,40,40);
+   rect(465, 390, 50, 50);
    FOURTHimg = loadImage(pow.getPower(3) + ".png");
-   image(FOURTHimg,448,3,15,15);  
+   image(FOURTHimg,490,415,40,40);  
 }
 
 void countScore(){
@@ -170,8 +389,9 @@ void countScore(){
       score += 10;
       map[y/30][x/30].identifier = pixel.SPACE;
     }
-    if (map[y/30][x/30].identifier == pixel.POWER){
-      displayPower();
+    if (map[y/30][x/30].identifier == pixel.POWER){  
+      countdown += 90;
+      pow.shufflePower();
       map[y/30][x/30].identifier = pixel.SPACE;
     }
   }

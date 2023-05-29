@@ -4,11 +4,11 @@ public class character{
   private int direction;
   private PImage charImage;
   private int[][] directions = new int[][]{{0,-2},{2,0},{0,2},{-2,0}};
-  public character(){
+  public character(String selection){
     x = -27;
     y = 405;
     direction = 1;
-    charImage = Mario;
+    charImage = loadImage(character + ".png");
   }
   
   
