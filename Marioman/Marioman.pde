@@ -1,5 +1,5 @@
 levels l;
-int levelNum = 1; // should start at zero, but we'll worry about this when we implement a menu
+int levelNum = 2; // should start at zero, but we'll worry about this when we implement a menu
 pixel[][] map = new pixel[27][27];
 int score = 0;
 PImage Mario;
