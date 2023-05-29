@@ -57,3 +57,6 @@
 
 ### date: May 28, 2023
 - worked on ghost class display and will work on more levels
+
+### date: May 29, 2023
+- finished level2
