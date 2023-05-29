@@ -89,7 +89,7 @@ void draw(){
     player.display();
     drawScore();
     g1.display();
-    g1.move();
+    g1.move(player.x, player.y);
     g2.display();
     g3.display();
     g4.display();
