@@ -64,6 +64,7 @@ void setup(){
     x = 0;
     y+=30;
   }
+  
 }
 
 void draw(){
@@ -217,6 +218,8 @@ void mouseClicked(){
         levelSelection = false;
         playing = true;
         player = new character(character);
+        g1.leaveSpawn();
+        
       }
       if(mouseY >= 390 && mouseY <= 430){
         levelNum = 6;
@@ -362,7 +365,7 @@ void drawScore(){
   text("SCORE: " + score , 5, 16);
 }
 
-void displayPower(){//need to figure out how to make it last longer
+void displayPower(){
    fill(180,150,40);
    stroke(255, 215, 80);
    strokeWeight(3);
@@ -391,7 +394,7 @@ void countScore(){
       map[y/30][x/30].identifier = pixel.SPACE;
     }
     if (map[y/30][x/30].identifier == pixel.POWER){  
-      countdown += 90;
+      countdown += 45;
       pow.shufflePower();
       map[y/30][x/30].identifier = pixel.SPACE;
     }

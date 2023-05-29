@@ -9,27 +9,30 @@ public class ghost{
     this.ghostImage = ghostImage;
   }
   
+  public void leaveSpawn(){   
+      x = 405;
+      y = 375;
+  }
   
    public void move(int playerX, int playerY){
      int dX = playerX - x;
      int dY = playerY - y;
-     if (Math.abs(dX) > Math.abs(dY)) {
-       if (dX > 0){
-         x++;
-        } 
-        else{
-         x--;
-         }
-        } 
-        else{
-         if (dY > 0){
-           y++;
-          } 
-          else{
-           y--;
+      if (Math.abs(dX) > Math.abs(dY)){
+        if (dX > 0 && map[(y/30)][((x+15)/30)].identifier < 0){
+          x++;
+         } 
+         else if (dX < 0 && map[(y/30)][((x-16)/30)].identifier > 0){
+            x--;
           }
+        } 
+        else{
+          if (dY > 0 && map[((y+15)/30)][(x/30)].identifier < 0){
+             y++;
+           } 
+           else if (dY < 0 && map[((y-16)/30)][(x/30)].identifier < 0){
+             y--;
+           }
         }
-
   }
   
 
