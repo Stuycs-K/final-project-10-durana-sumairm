@@ -21,6 +21,12 @@
 - slightly altered our wall designs to make everything symmetric
 - got the wrap around to work (actually this time)
 
+### date: May 28, 2023
+- added in the main menu, character selection menu, and level selection menu
+- added in one new character
+- added in different fonts to make our design a bit better
+- need to work on the overall design of our menus
+
 
 
 ## GROUP MEMBER 2: Arlette Duran
@@ -42,3 +48,15 @@
 - worked on removing coin once the character eats it
 - worked on powerUp class (powerUps are randomly shuffled and chosen)
 - need to figure out how to make powerUps display stay for a couple of seconds and then disappear
+
+### date: May 26, 2023
+- fixed the display for powerUps
+
+### date: May 27, 2023
+- no work done
+
+### date: May 28, 2023
+- worked on ghost class display and will work on more levels
+
+### date: May 29, 2023
+- finished level2

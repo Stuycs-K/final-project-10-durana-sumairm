@@ -11,6 +11,14 @@ pixel[][] map = new pixel[27][27];
 int score = 0;
 //character stuff
 character player;
+PImage Bowser;
+ghost g1;
+PImage KingBoo;
+ghost g2;
+PImage Wario;
+ghost g3;
+PImage Waluigi;
+ghost g4;
 String character = "Mario";
 //power-ups
 int countdown;
@@ -27,11 +35,25 @@ void setup(){
   //load fonts
   pacman = createFont("CrackMan.otf",100);
   pixelFont = createFont("PixelFont.otf",100);
+  
   //begin w/ main menu
   drawMainMenu();
-
+  
+  //load enemies
+  Bowser = loadImage("Bowser.png");
+  g1 = new ghost(350,410, Bowser);
+  KingBoo = loadImage("KingBoo.png");
+  g2 = new ghost(390,410, KingBoo);
+  Wario = loadImage("Wario.png");
+  g3 = new ghost(460,410, Wario);
+  Waluigi = loadImage("Waluigi.png");
+  g4 = new ghost(425, 410, Waluigi);
+  
   size(810,810);
+ 
   countdown = 0;
+  pow.shufflePower();
+  
   int x = 0;
   int y = 0;
   for(int i = 0; i < map.length; i++){ // sections the map into pixels
@@ -41,13 +63,6 @@ void setup(){
     }
     x = 0;
     y+=30;
-  }
-  
-  if(playing){
-    background(0);
-    drawMaze();
-    drawBorder();
-    drawGhostSpawn();
   }
 }
 
@@ -73,6 +88,14 @@ void draw(){
     countScore();
     player.display();
     drawScore();
+    g1.display();
+    g2.display();
+    g3.display();
+    g4.display();
+    if (countdown > 0){
+      displayPower();
+      countdown--;
+    }
   }
 }
 
@@ -203,6 +226,24 @@ void mouseClicked(){
         player = new character(character);
       }
     }
+    if(mouseX >= 181 && mouseX <= 321){
+      if(mouseY >= 330 && mouseY <= 370){
+        levelNum = 2;
+        drawMaze();
+        drawGhostSpawn();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+      if(mouseY >= 390 && mouseY <= 430){
+        levelNum = 7;
+        drawMaze();
+        drawGhostSpawn();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+    }
     if((mouseX >= 335 && mouseX <= 475) && (mouseY >= 460 && mouseY <= 500)){ // back button
       levelSelection = false;
       mainMenu = true;
@@ -277,7 +318,7 @@ public void drawGhostSpawn(){
   map[13][10].identifier = pixel.VWALL;
 }
 
-public void drawBorder(){ // should be moved to each level class later
+public void drawBorder(){
   for(int i = 0; i < map[0].length; i++){
     if(i == 0){
       map[0][i].identifier = pixel.TLCORNER;
@@ -321,22 +362,23 @@ void drawScore(){
 }
 
 void displayPower(){//need to figure out how to make it last longer
-   pow.shufflePower();
    fill(180,150,40);
    stroke(255, 215, 80);
    strokeWeight(3);
-   rect(335, 0, 30, 20);
+   rect(285, 390, 50, 50);
    FIRSTimg = loadImage(pow.getPower(0) + ".png");
-   image(FIRSTimg,343,3,15,15);
-   rect(370, 0, 30, 20);
+   image(FIRSTimg,310,415,40,40);
+   fill(35,10,135);
+   stroke(115, 80, 255);
+   rect(345, 390, 50, 50);
    SECimg = loadImage(pow.getPower(1) + ".png");
-   image(SECimg,378,3,15,15);
-   rect(405, 0, 30, 20);
+   image(SECimg,370,415,40,40);
+   rect(405, 390, 50, 50);
    THIRDimg = loadImage(pow.getPower(2) + ".png");
-   image(THIRDimg,413,3,15,15);
-   rect(440, 0, 30, 20);
+   image(THIRDimg,430,415,40,40);
+   rect(465, 390, 50, 50);
    FOURTHimg = loadImage(pow.getPower(3) + ".png");
-   image(FOURTHimg,448,3,15,15);  
+   image(FOURTHimg,490,415,40,40);  
 }
 
 void countScore(){
@@ -347,8 +389,9 @@ void countScore(){
       score += 10;
       map[y/30][x/30].identifier = pixel.SPACE;
     }
-    if (map[y/30][x/30].identifier == pixel.POWER){
-      displayPower();
+    if (map[y/30][x/30].identifier == pixel.POWER){  
+      countdown += 90;
+      pow.shufflePower();
       map[y/30][x/30].identifier = pixel.SPACE;
     }
   }
