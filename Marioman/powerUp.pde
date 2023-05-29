@@ -6,7 +6,7 @@ public class powerUp{
     p[1] = "god"; //player can not be killed by ghost
     p[2] = "teleport"; //player teleports to another location
     p[3] = "ghost"; //the ghosts are reset to their starting location
-}
+  }
   
   public void shufflePower(){//randomly mix powerUps
    for(int i = 0; i < 4; i++){
@@ -21,8 +21,3 @@ public class powerUp{
     return p[index];
   }
 }
-
-
-  
-  
-  
