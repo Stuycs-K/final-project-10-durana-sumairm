@@ -89,6 +89,7 @@ void draw(){
     player.display();
     drawScore();
     g1.display();
+    g1.move();
     g2.display();
     g3.display();
     g4.display();
@@ -301,7 +302,7 @@ public void drawGhostSpawn(){
   map[12][10].identifier = pixel.TLCORNER;
   map[12][11].identifier = pixel.HWALL;
   map[12][12].identifier = pixel.rEND;
-  map[12][13].identifier = pixel.SPACE;
+  map[12][13].identifier = pixel.INVISWALL;
   map[12][14].identifier = pixel.lEND;
   map[12][15].identifier = pixel.HWALL;
   map[12][16].identifier = pixel.TRCORNER;
