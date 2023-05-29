@@ -21,6 +21,12 @@
 - slightly altered our wall designs to make everything symmetric
 - got the wrap around to work (actually this time)
 
+### date: May 28, 2023
+- added in the main menu, character selection menu, and level selection menu
+- added in one new character
+- added in different fonts to make our design a bit better
+- need to work on the overall design of our menus
+
 
 
 ## GROUP MEMBER 2: Arlette Duran
