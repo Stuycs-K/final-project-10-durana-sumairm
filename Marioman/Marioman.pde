@@ -41,13 +41,13 @@ void setup(){
   
   //load enemies
   Bowser = loadImage("Bowser.png");
-  g1 = new ghost(350,410, Bowser);
+  g1 = new ghost(345,405, Bowser);
   KingBoo = loadImage("KingBoo.png");
-  g2 = new ghost(390,410, KingBoo);
+  g2 = new ghost(390,405, KingBoo);
   Wario = loadImage("Wario.png");
-  g3 = new ghost(460,410, Wario);
+  g3 = new ghost(450,405, Wario);
   Waluigi = loadImage("Waluigi.png");
-  g4 = new ghost(425, 410, Waluigi);
+  g4 = new ghost(420, 405, Waluigi);
   
   size(810,810);
  
@@ -86,11 +86,13 @@ void draw(){
       }
     }
     player.move();
+    //println(player.x + " " + player.y);
     countScore();
     player.display();
     drawScore();
     g1.display();
     g1.move(player.x, player.y);
+    println(g1.x + " " + g1.y);
     g2.display();
     g3.display();
     g4.display();
@@ -399,4 +401,8 @@ void countScore(){
       map[y/30][x/30].identifier = pixel.SPACE;
     }
   }
+}
+
+void canMove(){
+  
 }

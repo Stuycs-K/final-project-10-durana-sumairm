@@ -18,15 +18,19 @@ public class character{
     } else{
       if(directions[direction][0] > 0 && map[(y/30)][((x+15)/30)].identifier < 0){
         x+=directions[direction][0];
-      }
-      if(directions[direction][0] < 0 && map[(y/30)][((x-16)/30)].identifier < 0){
+      } else if(directions[direction][0] < 0 && map[(y/30)][((x-16)/30)].identifier < 0){
         x+=directions[direction][0];
-      }
-      if(directions[direction][1] > 0 && map[((y+15)/30)][(x/30)].identifier < 0){
+      } else if(directions[direction][1] > 0 && map[((y+15)/30)][(x/30)].identifier < 0){
         y+=directions[direction][1];
-      }
-      if(directions[direction][1] < 0 && map[((y-16)/30)][(x/30)].identifier < 0){
+      } else if(directions[direction][1] < 0 && map[((y-16)/30)][(x/30)].identifier < 0){
         y+=directions[direction][1];
+      } else{
+        if(x/15 !=0){
+          x = (x/15)*15;
+        }
+        if(y/15 != 0){
+          y = (y/15)*15;
+        }
       }
     }
     if(direction == 3 && x<=-16){

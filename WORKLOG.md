@@ -21,11 +21,20 @@
 - slightly altered our wall designs to make everything symmetric
 - got the wrap around to work (actually this time)
 
+### date: May 26, 2023
+- minor work done for the main menu
+
+### May 27, 2023
+- no work done
+
 ### date: May 28, 2023
 - added in the main menu, character selection menu, and level selection menu
 - added in one new character
 - added in different fonts to make our design a bit better
 - need to work on the overall design of our menus
+
+### date: May 29, 2023
+- added in images for ghosts that fit the dimensions and are transparent
 
 
 
