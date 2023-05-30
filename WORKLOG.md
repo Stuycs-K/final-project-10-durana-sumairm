@@ -70,3 +70,7 @@
 ### date: May 29, 2023
 - finished level2
 - figured out how to make ghost move (but it is moving through walls and need to figure out how to make ghost stay at spawn for a bit)
+
+### date: May 30, 2023
+- display the amount of lives
+- created game over screen when you have 0 lives
