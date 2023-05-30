@@ -20,6 +20,7 @@ ghost g3;
 PImage Waluigi;
 ghost g4;
 String character = "Mario";
+int lives = 3;
 //power-ups
 int countdown;
 powerUp pow = new powerUp();
@@ -90,6 +91,7 @@ void draw(){
     player.display();
     drawScore();
     g1.display();
+    //drawLives();
     g1.move(player.x, player.y);
     g2.display();
     g3.display();
@@ -213,12 +215,15 @@ void mouseClicked(){
     if(mouseX >= 30 && mouseX <= 170){
       if(mouseY >= 330 && mouseY <= 370){
         levelNum = 1;
+        drawLives();
         drawMaze();
         drawGhostSpawn();
+        drawLives();
         levelSelection = false;
         playing = true;
         player = new character(character);
         g1.leaveSpawn();
+        ghostKill();
         
       }
       if(mouseY >= 390 && mouseY <= 430){
@@ -285,6 +290,33 @@ void keyPressed(){
         player.direction = 3;
       }
     }
+  }
+}
+
+//=============================== CHARACTER KILLS
+
+void drawLives(){
+  fill(0);
+  rect(0, 785, 150, 20);
+  fill(255);
+  textFont(pixelFont);
+  textSize(14);
+  text("LIVES: " + lives, 5, 801);
+
+}
+
+void ghostKill(){
+  if ( (g1.x / 30) ==  (player.x / 30) && (g1.y / 30) == (player.y / 30) ){
+    lives--;
+  }
+  if (map[g2.y/30][g2.x/30] == map[player.y/30][player.x/30]){
+    lives--;
+  }
+  if (map[g3.y/30][g3.x/30] == map[player.y/30][player.x/30]){
+    lives--;
+  }
+  if (map[g4.y/30][g4.x/30] == map[player.y/30][player.x/30]){
+    lives--;
   }
 }
   
