@@ -4,6 +4,12 @@ boolean playing = false;
 boolean levelSelection = false;
 boolean characterSelection = false;
 
+//directions
+final int dUP = 0;
+final int dRIGHT = 1;
+final int dDOWN = 2;
+final int dLEFT = 3;
+
 //levels
 levels l;
 int levelNum = 1;
@@ -275,16 +281,16 @@ void keyPressed(){
   if(playing){
     if((player.x+15) < 810 && (player.x-16) > 0){
       if((keyCode == UP && map[((player.y-16)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
-        player.direction = 0;
+        player.direction = dUP;
       }
       if((keyCode == RIGHT && map[(player.y/30)][((player.x+15)/30)].identifier < 0) && (player.y%15 == 0)){
-        player.direction = 1;
+        player.direction = dRIGHT;
       }
       if((keyCode == DOWN && map[((player.y+15)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
-        player.direction = 2;
+        player.direction = dDOWN;
       }
       if((keyCode == LEFT && map[(player.y/30)][((player.x-16)/30)].identifier < 0) && (player.y%15 == 0)){
-        player.direction = 3;
+        player.direction = dLEFT;
       }
     }
   }

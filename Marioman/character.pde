@@ -7,7 +7,7 @@ public class character{
   public character(String selection){
     x = -27;
     y = 405;
-    direction = 1;
+    direction = dRIGHT;
     charImage = loadImage(character + ".png");
   }
   
@@ -24,19 +24,12 @@ public class character{
         y+=directions[direction][1];
       } else if(directions[direction][1] < 0 && map[((y-16)/30)][(x/30)].identifier < 0){
         y+=directions[direction][1];
-      } else{
-        if(x/15 !=0){
-          x = (x/15)*15;
-        }
-        if(y/15 != 0){
-          y = (y/15)*15;
-        }
       }
     }
-    if(direction == 3 && x<=-16){
+    if(direction == dLEFT && x<=-16){
       x = 825;
     }
-    if(x >= 840 && direction == 1){
+    if(x >= 840 && direction == dRIGHT){
       x = -30;
     }
   }
