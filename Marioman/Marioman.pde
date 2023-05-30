@@ -91,7 +91,8 @@ void draw(){
     player.display();
     drawScore();
     g1.display();
-    //drawLives();
+    ghostKill();
+    drawLives();
     g1.move(player.x, player.y);
     g2.display();
     g3.display();
@@ -215,7 +216,6 @@ void mouseClicked(){
     if(mouseX >= 30 && mouseX <= 170){
       if(mouseY >= 330 && mouseY <= 370){
         levelNum = 1;
-        drawLives();
         drawMaze();
         drawGhostSpawn();
         drawLives();
@@ -223,7 +223,6 @@ void mouseClicked(){
         playing = true;
         player = new character(character);
         g1.leaveSpawn();
-        ghostKill();
         
       }
       if(mouseY >= 390 && mouseY <= 430){
@@ -305,18 +304,20 @@ void drawLives(){
 
 }
 
-void ghostKill(){
-  if ( (g1.x / 30) ==  (player.x / 30) && (g1.y / 30) == (player.y / 30) ){
-    lives--;
-  }
-  if (map[g2.y/30][g2.x/30] == map[player.y/30][player.x/30]){
-    lives--;
-  }
-  if (map[g3.y/30][g3.x/30] == map[player.y/30][player.x/30]){
-    lives--;
-  }
-  if (map[g4.y/30][g4.x/30] == map[player.y/30][player.x/30]){
-    lives--;
+public void ghostKill(){
+  if (lives > 0){
+    if ((g1.x / 30) ==  (player.x / 30) && (g1.y / 30) == (player.y / 30) ){
+      lives--;
+    }
+    if (map[g2.y/30][g2.x/30] == map[player.y/30][player.x/30]){
+      lives--;
+    }
+    if (map[g3.y/30][g3.x/30] == map[player.y/30][player.x/30]){
+      lives--;
+    }
+    if (map[g4.y/30][g4.x/30] == map[player.y/30][player.x/30]){
+      lives--;
+    }
   }
 }
   
@@ -388,15 +389,6 @@ public void drawBorder(){
   map[14][26].identifier = pixel.TLCORNER;
 }
 
-void drawScore(){
-  fill(0);
-  rect(0, 0, 200, 20);
-  fill(255);
-  textFont(pixelFont);
-  textSize(14);
-  text("SCORE: " + score , 5, 16);
-}
-
 void displayPower(){
    fill(180,150,40);
    stroke(255, 215, 80);
@@ -414,7 +406,16 @@ void displayPower(){
    image(THIRDimg,430,415,40,40);
    rect(465, 390, 50, 50);
    FOURTHimg = loadImage(pow.getPower(3) + ".png");
-   image(FOURTHimg,490,415,40,40);  
+   image(FOURTHimg,490,415,40,40); 
+}
+
+void drawScore(){
+  fill(0);
+  rect(0, 0, 200, 20);
+  fill(255);
+  textFont(pixelFont);
+  textSize(14);
+  text("SCORE: " + score , 5, 16);
 }
 
 void countScore(){
