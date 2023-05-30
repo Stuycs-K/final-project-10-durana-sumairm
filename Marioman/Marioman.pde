@@ -3,6 +3,7 @@ boolean mainMenu = true;
 boolean playing = false;
 boolean levelSelection = false;
 boolean characterSelection = false;
+boolean overScreen = false;
 
 //levels
 levels l;
@@ -24,6 +25,7 @@ int lives = 3;
 //power-ups
 int countdown;
 powerUp pow = new powerUp();
+PImage power;
 PImage FIRSTimg;
 PImage SECimg;
 PImage THIRDimg;
@@ -101,6 +103,9 @@ void draw(){
       displayPower();
       countdown--;
     }
+  }
+  if (lives == 0){
+    drawGameOver();
   }
 }
 
@@ -197,6 +202,33 @@ public void drawCharacterMenu(){
   textAlign(LEFT,BASELINE);
 }
 
+public void drawGameOver(){
+  overScreen = true;
+  power = loadImage("Power.png");
+  background(0);
+  textFont(pixelFont);
+  textAlign(CENTER,CENTER);
+  textSize(70);
+  text("GAME  OVER", 405, 370);
+  imageMode(CENTER);
+  image(power,410,380,70,70);
+  image(loadImage("Mario.png"),130,250,100,100);
+  image(Bowser,350,250,100,100);
+  image(KingBoo,480,250,100,100);
+  image(Waluigi,590,250,100,100);
+  image(Wario,710,250,100,100);
+  
+  fill(#f3cf34);
+  noStroke();
+  rectMode(CENTER);
+  rect(405,480,240,60);
+  rectMode(CORNER);
+  fill(0);
+  textSize(20);
+  text("PLAY AGAIN",405,475);
+  imageMode(CORNER);
+  textAlign(LEFT,BASELINE);
+}
 
 //=============================== MENU FUNCTIONALITY & PLAYER CONTROLS
 
@@ -268,6 +300,12 @@ void mouseClicked(){
     }
     if((mouseX >= 335 && mouseX <= 475) && (mouseY >= 460 && mouseY <= 500)){ // back button
       characterSelection = false;
+      mainMenu = true;
+    }
+  }
+  if (overScreen){
+    if ((mouseY >= 410 && mouseY <= 510) && (mouseX >= 285 && mouseX <= 525)){
+      overScreen = false;
       mainMenu = true;
     }
   }
