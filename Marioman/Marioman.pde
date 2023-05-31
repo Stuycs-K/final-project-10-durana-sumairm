@@ -16,8 +16,10 @@ levels l;
 int levelNum = 1;
 pixel[][] map = new pixel[27][27];
 int score = 0;
+
 //character stuff
 character player;
+boolean isCentered;
 PImage Bowser;
 ghost g1;
 PImage KingBoo;
@@ -28,6 +30,7 @@ PImage Waluigi;
 ghost g4;
 String character = "Mario";
 int lives = 3;
+
 //power-ups
 int countdown;
 powerUp pow = new powerUp();
@@ -36,6 +39,7 @@ PImage FIRSTimg;
 PImage SECimg;
 PImage THIRDimg;
 PImage FOURTHimg;
+
 //fonts
 PFont pacman;
 PFont pixelFont;
@@ -95,7 +99,8 @@ void draw(){
       }
     }
     player.move();
-    //println(player.x + " " + player.y);
+    isCentered = player.isCentered();
+    println(isCentered);
     countScore();
     player.display();
     drawScore();
@@ -103,7 +108,7 @@ void draw(){
     ghostKill();
     drawLives();
     g1.move(player.x, player.y);
-    println(g1.x + " " + g1.y);
+    //println(g1.x + " " + g1.y);
     g2.display();
     g3.display();
     g4.display();
@@ -322,16 +327,21 @@ void mouseClicked(){
 void keyPressed(){
   if(playing){
     if((player.x+15) < 810 && (player.x-16) > 0){
-      if((keyCode == UP && map[((player.y-16)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
-        player.direction = dUP;
+      if(keyCode == UP && player.direction == -1){
+        if(isCentered && map[((player.y-16)/30)][(player.x/30)].identifier < 0){
+          player.direction = dUP;
+        }
+        if(player.direction == -1){
+          player.direction = dUP;
+        }
       }
-      if((keyCode == RIGHT && map[(player.y/30)][((player.x+15)/30)].identifier < 0) && (player.y%15 == 0)){
+      if(keyCode == RIGHT && player.direction == -1){
         player.direction = dRIGHT;
       }
-      if((keyCode == DOWN && map[((player.y+15)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
+      if(keyCode == DOWN && player.direction == -1){
         player.direction = dDOWN;
       }
-      if((keyCode == LEFT && map[(player.y/30)][((player.x-16)/30)].identifier < 0) && (player.y%15 == 0)){
+      if(keyCode == LEFT && player.direction == -1){
         player.direction = dLEFT;
       }
     }
