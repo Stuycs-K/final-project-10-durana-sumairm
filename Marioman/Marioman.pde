@@ -327,22 +327,37 @@ void mouseClicked(){
 void keyPressed(){
   if(playing){
     if((player.x+15) < 810 && (player.x-16) > 0){
-      if(keyCode == UP && player.direction == -1){
-        if(isCentered && map[((player.y-16)/30)][(player.x/30)].identifier < 0){
+      if(keyCode == UP){
+        if(canMoveUp()){
           player.direction = dUP;
         }
         if(player.direction == -1){
           player.direction = dUP;
         }
       }
-      if(keyCode == RIGHT && player.direction == -1){
-        player.direction = dRIGHT;
+      if(keyCode == RIGHT){
+        if(canMoveRight()){
+          player.direction = dRIGHT;
+        }
+        if(player.direction == -1){
+          player.direction = dRIGHT;
+        }
       }
-      if(keyCode == DOWN && player.direction == -1){
-        player.direction = dDOWN;
+      if(keyCode == DOWN){
+        if(canMoveDown()){
+          player.direction = dDOWN;
+        }
+        if(player.direction == -1){
+          player.direction = dDOWN;
+        }
       }
-      if(keyCode == LEFT && player.direction == -1){
-        player.direction = dLEFT;
+      if(keyCode == LEFT){
+        if(canMoveLeft()){
+          player.direction = dLEFT;
+        }
+        if(player.direction == -1){
+          player.direction = dLEFT;
+        }
       }
     }
   }
@@ -490,6 +505,18 @@ void countScore(){
   }
 }
 
-void canMove(){
-  
+boolean canMoveLeft(){
+  return (map[(player.y/30)][((player.x-16)/30)].identifier < 0 && isCentered);
+}
+
+boolean canMoveDown(){
+  return (map[((player.y+15)/30)][(player.x/30)].identifier < 0 && isCentered);
+}
+
+boolean canMoveUp(){
+  return (map[((player.y-16)/30)][(player.x/30)].identifier < 0 && isCentered);
+}
+
+boolean canMoveRight(){
+  return (map[(player.y/30)][((player.x+15)/30)].identifier < 0 && isCentered);
 }
