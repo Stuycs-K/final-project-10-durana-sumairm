@@ -376,18 +376,20 @@ void drawLives(){
 }
 
 public void ghostKill(){
-  if (lives > 0){
-    if ((g1.x / 30) ==  (player.x / 30) && (g1.y / 30) == (player.y / 30) ){
-      lives--;
-    }
-    if (map[g2.y/30][g2.x/30] == map[player.y/30][player.x/30]){
-      lives--;
-    }
-    if (map[g3.y/30][g3.x/30] == map[player.y/30][player.x/30]){
-      lives--;
-    }
-    if (map[g4.y/30][g4.x/30] == map[player.y/30][player.x/30]){
-      lives--;
+  if((player.x >= 29 && player.x <= 780) && (player.y >= 29 && player.y <= 780)){
+    if (lives > 0){
+      if ((g1.x / 30) ==  (player.x / 30) && (g1.y / 30) == (player.y / 30) ){
+        lives--;
+      }
+      if (map[g2.y/30][g2.x/30] == map[player.y/30][player.x/30]){
+        lives--;
+      }
+      if (map[g3.y/30][g3.x/30] == map[player.y/30][player.x/30]){
+        lives--;
+      }
+      if (map[g4.y/30][g4.x/30] == map[player.y/30][player.x/30]){
+        lives--;
+      }
     }
   }
 }
