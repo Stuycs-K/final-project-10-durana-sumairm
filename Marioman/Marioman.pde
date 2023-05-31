@@ -223,6 +223,7 @@ public void drawGameOver(){
   textFont(pixelFont);
   textAlign(CENTER,CENTER);
   textSize(70);
+  fill(255);
   text("GAME  OVER", 405, 370);
   imageMode(CENTER);
   image(power,410,380,70,70);
@@ -269,7 +270,7 @@ void mouseClicked(){
         playing = true;
         player = new character(character);
         g1.leaveSpawn();
-        
+       
       }
       if(mouseY >= 390 && mouseY <= 430){
         levelNum = 6;
@@ -365,7 +366,7 @@ void keyPressed(){
   }
 }
 
-//=============================== CHARACTER KILLS
+//=============================== CHARACTER KILLS 
 
 void drawLives(){
   fill(0);
@@ -508,10 +509,30 @@ void countScore(){
     if (map[y/30][x/30].identifier == pixel.POWER){  
       countdown += 45;
       pow.shufflePower();
+      pUP();
       map[y/30][x/30].identifier = pixel.SPACE;
     }
   }
 }
+
+void pUP(){
+  if (pow.getPower(0).equals("boost")){
+    //make character move faster
+  }
+  if (pow.getPower(0).equals("god")){
+    lives++;
+  }
+  if (pow.getPower(0).equals("teleport")){
+    if (map[mouseY/30][mouseX/30].identifier < 0 ){
+      player.x = map[mouseY/30][mouseX/30].centerX;
+      player.y = map[mouseY/30][mouseX/30].centerY;
+    }
+  }
+  if (pow.getPower(0).equals("ghost")){
+    g1.leaveSpawn();
+  }
+}
+
 
 boolean canMoveLeft(){
   return (map[(player.y/30)][((player.x-16)/30)].identifier < 0 && isCentered);
