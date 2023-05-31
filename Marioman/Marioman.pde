@@ -3,14 +3,23 @@ boolean mainMenu = true;
 boolean playing = false;
 boolean levelSelection = false;
 boolean characterSelection = false;
+boolean overScreen = false;
+
+//directions
+final int dUP = 0;
+final int dRIGHT = 1;
+final int dDOWN = 2;
+final int dLEFT = 3;
 
 //levels
 levels l;
 int levelNum = 1;
 pixel[][] map = new pixel[27][27];
 int score = 0;
+
 //character stuff
 character player;
+boolean isCentered;
 PImage Bowser;
 ghost g1;
 PImage KingBoo;
@@ -20,13 +29,17 @@ ghost g3;
 PImage Waluigi;
 ghost g4;
 String character = "Mario";
+int lives = 3;
+
 //power-ups
 int countdown;
 powerUp pow = new powerUp();
+PImage power;
 PImage FIRSTimg;
 PImage SECimg;
 PImage THIRDimg;
 PImage FOURTHimg;
+
 //fonts
 PFont pacman;
 PFont pixelFont;
@@ -78,6 +91,10 @@ void draw(){
   if(characterSelection){
     drawCharacterMenu();
   }
+  if (lives == 0 || overScreen){
+    playing = false;
+    drawGameOver();
+  }
   if(playing){
     background(0);
     for(int i = 0; i < map.length; i++){
@@ -86,13 +103,16 @@ void draw(){
       }
     }
     player.move();
-    //println(player.x + " " + player.y);
+    isCentered = player.isCentered();
+    println(isCentered);
     countScore();
     player.display();
     drawScore();
     g1.display();
+    ghostKill();
+    drawLives();
     g1.move(player.x, player.y);
-    println(g1.x + " " + g1.y);
+    //println(g1.x + " " + g1.y);
     g2.display();
     g3.display();
     g4.display();
@@ -196,6 +216,33 @@ public void drawCharacterMenu(){
   textAlign(LEFT,BASELINE);
 }
 
+public void drawGameOver(){
+  overScreen = true;
+  power = loadImage("Power.png");
+  background(0);
+  textFont(pixelFont);
+  textAlign(CENTER,CENTER);
+  textSize(70);
+  text("GAME  OVER", 405, 370);
+  imageMode(CENTER);
+  image(power,410,380,70,70);
+  image(loadImage(character + ".png"),130,250,100,100);
+  image(Bowser,350,250,100,100);
+  image(KingBoo,480,250,100,100);
+  image(Waluigi,590,250,100,100);
+  image(Wario,710,250,100,100);
+  
+  fill(#f3cf34);
+  noStroke();
+  rectMode(CENTER);
+  rect(405,480,240,60);
+  rectMode(CORNER);
+  fill(0);
+  textSize(20);
+  text("PLAY AGAIN",405,475);
+  imageMode(CORNER);
+  textAlign(LEFT,BASELINE);
+}
 
 //=============================== MENU FUNCTIONALITY & PLAYER CONTROLS
 
@@ -217,6 +264,7 @@ void mouseClicked(){
         levelNum = 1;
         drawMaze();
         drawGhostSpawn();
+        drawLives();
         levelSelection = false;
         playing = true;
         player = new character(character);
@@ -269,22 +317,80 @@ void mouseClicked(){
       mainMenu = true;
     }
   }
+  if (overScreen){
+    if ((mouseY >= 410 && mouseY <= 510) && (mouseX >= 285 && mouseX <= 525)){
+      overScreen = false;
+      lives = 3;
+      mainMenu = true;
+    }
+  }
 }
 
 void keyPressed(){
   if(playing){
     if((player.x+15) < 810 && (player.x-16) > 0){
-      if((keyCode == UP && map[((player.y-16)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
-        player.direction = 0;
+      if(keyCode == UP){
+        if(canMoveUp()){
+          player.direction = dUP;
+        }
+        if(player.direction == -1){
+          player.direction = dUP;
+        }
       }
-      if((keyCode == RIGHT && map[(player.y/30)][((player.x+15)/30)].identifier < 0) && (player.y%15 == 0)){
-        player.direction = 1;
+      if(keyCode == RIGHT){
+        if(canMoveRight()){
+          player.direction = dRIGHT;
+        }
+        if(player.direction == -1){
+          player.direction = dRIGHT;
+        }
       }
-      if((keyCode == DOWN && map[((player.y+15)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
-        player.direction = 2;
+      if(keyCode == DOWN){
+        if(canMoveDown()){
+          player.direction = dDOWN;
+        }
+        if(player.direction == -1){
+          player.direction = dDOWN;
+        }
       }
-      if((keyCode == LEFT && map[(player.y/30)][((player.x-16)/30)].identifier < 0) && (player.y%15 == 0)){
-        player.direction = 3;
+      if(keyCode == LEFT){
+        if(canMoveLeft()){
+          player.direction = dLEFT;
+        }
+        if(player.direction == -1){
+          player.direction = dLEFT;
+        }
+      }
+    }
+  }
+}
+
+//=============================== CHARACTER KILLS
+
+void drawLives(){
+  fill(0);
+  rect(0, 785, 150, 20);
+  fill(255);
+  textFont(pixelFont);
+  textSize(14);
+  text("LIVES: " + lives, 5, 801);
+
+}
+
+public void ghostKill(){
+  if((player.x >= 29 && player.x <= 780) && (player.y >= 29 && player.y <= 780)){
+    if (lives > 0){
+      if ((g1.x / 30) ==  (player.x / 30) && (g1.y / 30) == (player.y / 30) ){
+        lives--;
+      }
+      if (map[g2.y/30][g2.x/30] == map[player.y/30][player.x/30]){
+        lives--;
+      }
+      if (map[g3.y/30][g3.x/30] == map[player.y/30][player.x/30]){
+        lives--;
+      }
+      if (map[g4.y/30][g4.x/30] == map[player.y/30][player.x/30]){
+        lives--;
       }
     }
   }
@@ -358,15 +464,6 @@ public void drawBorder(){
   map[14][26].identifier = pixel.TLCORNER;
 }
 
-void drawScore(){
-  fill(0);
-  rect(0, 0, 200, 20);
-  fill(255);
-  textFont(pixelFont);
-  textSize(14);
-  text("SCORE: " + score , 5, 16);
-}
-
 void displayPower(){
    fill(180,150,40);
    stroke(255, 215, 80);
@@ -384,7 +481,16 @@ void displayPower(){
    image(THIRDimg,430,415,40,40);
    rect(465, 390, 50, 50);
    FOURTHimg = loadImage(pow.getPower(3) + ".png");
-   image(FOURTHimg,490,415,40,40);  
+   image(FOURTHimg,490,415,40,40); 
+}
+
+void drawScore(){
+  fill(0);
+  rect(0, 0, 200, 20);
+  fill(255);
+  textFont(pixelFont);
+  textSize(14);
+  text("SCORE: " + score , 5, 16);
 }
 
 void countScore(){
@@ -403,6 +509,18 @@ void countScore(){
   }
 }
 
-void canMove(){
-  
+boolean canMoveLeft(){
+  return (map[(player.y/30)][((player.x-16)/30)].identifier < 0 && isCentered);
+}
+
+boolean canMoveDown(){
+  return (map[((player.y+15)/30)][(player.x/30)].identifier < 0 && isCentered);
+}
+
+boolean canMoveUp(){
+  return (map[((player.y-16)/30)][(player.x/30)].identifier < 0 && isCentered);
+}
+
+boolean canMoveRight(){
+  return (map[(player.y/30)][((player.x+15)/30)].identifier < 0 && isCentered);
 }

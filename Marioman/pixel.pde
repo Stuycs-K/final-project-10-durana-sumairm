@@ -1,6 +1,8 @@
 public class pixel{
   private int x;
   private int y;
+  private int centerX;
+  private int centerY;
   public int identifier = -1; // default for an empty space
   private static final int SPACE = -1;
   private static final int VWALL = 0;
@@ -23,6 +25,8 @@ public class pixel{
   public pixel(int x1, int y1){
     this.x = x1;
     this.y = y1;
+    centerX = this.x+15;
+    centerY = this.y+15;
   }
   
 // ==============================================================================================================
@@ -120,4 +124,5 @@ public class pixel{
       image(POWERimg,x+4.5,y+4.5,20,20);
     }
   }
+ 
 }
