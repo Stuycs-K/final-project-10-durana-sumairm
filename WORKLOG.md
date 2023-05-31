@@ -36,6 +36,11 @@
 ### date: May 29, 2023
 - added in images for ghosts that fit the dimensions and are transparent
 
+### date: May 30, 2023
+- implemented a new method for character movement thanks to Mr. K's help
+- need to figure out how to get enemy movement working better
+- need to work on the game over screen and figure out a small bug with the text
+
 
 
 ## GROUP MEMBER 2: Arlette Duran
