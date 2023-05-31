@@ -120,4 +120,5 @@ public class pixel{
       image(POWERimg,x+4.5,y+4.5,20,20);
     }
   }
+ 
 }
