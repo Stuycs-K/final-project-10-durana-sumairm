@@ -5,21 +5,13 @@ boolean levelSelection = false;
 boolean characterSelection = false;
 boolean overScreen = false;
 
-//directions
-final int dUP = 0;
-final int dRIGHT = 1;
-final int dDOWN = 2;
-final int dLEFT = 3;
-
 //levels
 levels l;
 int levelNum = 1;
 pixel[][] map = new pixel[27][27];
 int score = 0;
-
 //character stuff
 character player;
-boolean isCentered;
 PImage Bowser;
 ghost g1;
 PImage KingBoo;
@@ -30,7 +22,6 @@ PImage Waluigi;
 ghost g4;
 String character = "Mario";
 int lives = 3;
-
 //power-ups
 int countdown;
 powerUp pow = new powerUp();
@@ -39,7 +30,6 @@ PImage FIRSTimg;
 PImage SECimg;
 PImage THIRDimg;
 PImage FOURTHimg;
-
 //fonts
 PFont pacman;
 PFont pixelFont;
@@ -54,13 +44,13 @@ void setup(){
   
   //load enemies
   Bowser = loadImage("Bowser.png");
-  g1 = new ghost(345,405, Bowser);
+  g1 = new ghost(350,410, Bowser);
   KingBoo = loadImage("KingBoo.png");
-  g2 = new ghost(390,405, KingBoo);
+  g2 = new ghost(390,410, KingBoo);
   Wario = loadImage("Wario.png");
-  g3 = new ghost(450,405, Wario);
+  g3 = new ghost(460,410, Wario);
   Waluigi = loadImage("Waluigi.png");
-  g4 = new ghost(420, 405, Waluigi);
+  g4 = new ghost(425, 410, Waluigi);
   
   size(810,810);
  
@@ -91,10 +81,6 @@ void draw(){
   if(characterSelection){
     drawCharacterMenu();
   }
-  if (lives == 0 || overScreen){
-    playing = false;
-    drawGameOver();
-  }
   if(playing){
     background(0);
     for(int i = 0; i < map.length; i++){
@@ -103,8 +89,6 @@ void draw(){
       }
     }
     player.move();
-    isCentered = player.isCentered();
-    println(isCentered);
     countScore();
     player.display();
     drawScore();
@@ -112,7 +96,6 @@ void draw(){
     ghostKill();
     drawLives();
     g1.move(player.x, player.y);
-    //println(g1.x + " " + g1.y);
     g2.display();
     g3.display();
     g4.display();
@@ -120,6 +103,9 @@ void draw(){
       displayPower();
       countdown--;
     }
+  }
+  if (lives == 0){
+    drawGameOver();
   }
 }
 
@@ -226,7 +212,7 @@ public void drawGameOver(){
   text("GAME  OVER", 405, 370);
   imageMode(CENTER);
   image(power,410,380,70,70);
-  image(loadImage(character + ".png"),130,250,100,100);
+  image(loadImage("Mario.png"),130,250,100,100);
   image(Bowser,350,250,100,100);
   image(KingBoo,480,250,100,100);
   image(Waluigi,590,250,100,100);
@@ -318,9 +304,8 @@ void mouseClicked(){
     }
   }
   if (overScreen){
-    if ((mouseY >= 410 && mouseY <= 510) && (mouseX >= 285 && mouseX <= 525)){
+    if ((mouseX >= 285 && mouseX <= 525) && (mouseY >= 410 && mouseY <= 510)){
       overScreen = false;
-      lives = 3;
       mainMenu = true;
     }
   }
@@ -329,37 +314,17 @@ void mouseClicked(){
 void keyPressed(){
   if(playing){
     if((player.x+15) < 810 && (player.x-16) > 0){
-      if(keyCode == UP){
-        if(canMoveUp()){
-          player.direction = dUP;
-        }
-        if(player.direction == -1){
-          player.direction = dUP;
-        }
+      if((keyCode == UP && map[((player.y-16)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
+        player.direction = 0;
       }
-      if(keyCode == RIGHT){
-        if(canMoveRight()){
-          player.direction = dRIGHT;
-        }
-        if(player.direction == -1){
-          player.direction = dRIGHT;
-        }
+      if((keyCode == RIGHT && map[(player.y/30)][((player.x+15)/30)].identifier < 0) && (player.y%15 == 0)){
+        player.direction = 1;
       }
-      if(keyCode == DOWN){
-        if(canMoveDown()){
-          player.direction = dDOWN;
-        }
-        if(player.direction == -1){
-          player.direction = dDOWN;
-        }
+      if((keyCode == DOWN && map[((player.y+15)/30)][(player.x/30)].identifier < 0) && (player.x%15 == 0)){
+        player.direction = 2;
       }
-      if(keyCode == LEFT){
-        if(canMoveLeft()){
-          player.direction = dLEFT;
-        }
-        if(player.direction == -1){
-          player.direction = dLEFT;
-        }
+      if((keyCode == LEFT && map[(player.y/30)][((player.x-16)/30)].identifier < 0) && (player.y%15 == 0)){
+        player.direction = 3;
       }
     }
   }
@@ -378,24 +343,18 @@ void drawLives(){
 }
 
 public void ghostKill(){
-  if((player.x >= 29 && player.x <= 780) && (player.y >= 29 && player.y <= 780)){
-    if (lives > 0){
-      if ((g1.x / 30) ==  (player.x / 30) && (g1.y / 30) == (player.y / 30) ){
-        player.start();
-        lives--;
-      }
-      if (map[g2.y/30][g2.x/30] == map[player.y/30][player.x/30]){
-        player.start();
-        lives--;
-      }
-      if (map[g3.y/30][g3.x/30] == map[player.y/30][player.x/30]){
-        player.start();
-        lives--;
-      }
-      if (map[g4.y/30][g4.x/30] == map[player.y/30][player.x/30]){
-        player.start();
-        lives--;
-      }
+  if (lives > 0){
+    if ((g1.x / 30) ==  (player.x / 30) && (g1.y / 30) == (player.y / 30) ){
+      lives--;
+    }
+    if (map[g2.y/30][g2.x/30] == map[player.y/30][player.x/30]){
+      lives--;
+    }
+    if (map[g3.y/30][g3.x/30] == map[player.y/30][player.x/30]){
+      lives--;
+    }
+    if (map[g4.y/30][g4.x/30] == map[player.y/30][player.x/30]){
+      lives--;
     }
   }
 }
@@ -511,20 +470,4 @@ void countScore(){
       map[y/30][x/30].identifier = pixel.SPACE;
     }
   }
-}
-
-boolean canMoveLeft(){
-  return (map[(player.y/30)][((player.x-16)/30)].identifier < 0 && isCentered);
-}
-
-boolean canMoveDown(){
-  return (map[((player.y+15)/30)][(player.x/30)].identifier < 0 && isCentered);
-}
-
-boolean canMoveUp(){
-  return (map[((player.y-16)/30)][(player.x/30)].identifier < 0 && isCentered);
-}
-
-boolean canMoveRight(){
-  return (map[(player.y/30)][((player.x+15)/30)].identifier < 0 && isCentered);
 }

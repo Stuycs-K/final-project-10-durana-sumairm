@@ -41,6 +41,11 @@ public class character{
       return(x == map[y/30][x/30].centerX && y == map[y/30][x/30].centerY);
     } return false;
   }
+  
+  public void start(){
+    x = -27;
+    y = 405;
+  }
 
   public void display(){
     fill(255);
