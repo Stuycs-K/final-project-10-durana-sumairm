@@ -19,7 +19,6 @@ int score = 0;
 
 //character stuff
 character player;
-boolean isCentered;
 PImage Bowser;
 ghost g1;
 PImage KingBoo;
@@ -103,8 +102,8 @@ void draw(){
       }
     }
     player.move();
-    isCentered = player.isCentered();
-    println(isCentered);
+    player.isCentered = player.isCentered();
+    println(player.isCentered);
     countScore();
     player.display();
     drawScore();
@@ -514,17 +513,17 @@ void countScore(){
 }
 
 boolean canMoveLeft(){
-  return (map[(player.y/30)][((player.x-16)/30)].identifier < 0 && isCentered);
+  return (map[(player.y/30)][((player.x-16)/30)].identifier < 0 && player.isCentered);
 }
 
 boolean canMoveDown(){
-  return (map[((player.y+15)/30)][(player.x/30)].identifier < 0 && isCentered);
+  return (map[((player.y+15)/30)][(player.x/30)].identifier < 0 && player.isCentered);
 }
 
 boolean canMoveUp(){
-  return (map[((player.y-16)/30)][(player.x/30)].identifier < 0 && isCentered);
+  return (map[((player.y-16)/30)][(player.x/30)].identifier < 0 && player.isCentered);
 }
 
 boolean canMoveRight(){
-  return (map[(player.y/30)][((player.x+15)/30)].identifier < 0 && isCentered);
+  return (map[(player.y/30)][((player.x+15)/30)].identifier < 0 && player.isCentered);
 }
