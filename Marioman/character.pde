@@ -38,7 +38,7 @@ public class character{
   
   public boolean isCentered(){
     if((x >= 30 && x <= 780) && (y >= 30 && y <= 780)){
-      return(x == map[y/30][x/30].centerX && x == map[y/30][x/30].centerX);
+      return(x == map[y/30][x/30].centerX && y == map[y/30][x/30].centerY);
     } return false;
   }
 
