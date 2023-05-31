@@ -91,6 +91,10 @@ void draw(){
   if(characterSelection){
     drawCharacterMenu();
   }
+  if (lives == 0 || overScreen){
+    playing = false;
+    drawGameOver();
+  }
   if(playing){
     background(0);
     for(int i = 0; i < map.length; i++){
@@ -116,9 +120,6 @@ void draw(){
       displayPower();
       countdown--;
     }
-  }
-  if (lives == 0){
-    drawGameOver();
   }
 }
 
@@ -225,7 +226,7 @@ public void drawGameOver(){
   text("GAME  OVER", 405, 370);
   imageMode(CENTER);
   image(power,410,380,70,70);
-  image(loadImage("Mario.png"),130,250,100,100);
+  image(loadImage(character + ".png"),130,250,100,100);
   image(Bowser,350,250,100,100);
   image(KingBoo,480,250,100,100);
   image(Waluigi,590,250,100,100);
@@ -319,6 +320,7 @@ void mouseClicked(){
   if (overScreen){
     if ((mouseY >= 410 && mouseY <= 510) && (mouseX >= 285 && mouseX <= 525)){
       overScreen = false;
+      lives = 3;
       mainMenu = true;
     }
   }
