@@ -3,8 +3,8 @@ public class powerUp{
   
   public powerUp(){
     p[0] = "boost"; //player moves faster
-    p[1] = "god"; //player can not be killed by ghost
-    p[2] = "teleport"; //player teleports to another location
+    p[1] = "god"; //adds one life to player
+    p[2] = "teleport"; //player teleports to another location based off cursor
     p[3] = "ghost"; //the ghosts are reset to their starting location
   }
   
