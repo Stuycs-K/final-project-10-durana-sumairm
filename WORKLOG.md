@@ -83,3 +83,6 @@
 ### date: May 31, 2023
 - work on powerUps and what they do
 - when player dies it restarts
+
+### date: June 1, 2023
+- continued working on powerUps
