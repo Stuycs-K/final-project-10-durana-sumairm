@@ -34,6 +34,8 @@ int lives = 3;
 //power-ups
 int countdown;
 powerUp pow = new powerUp();
+boolean notGodMode = true; //if it is true then you can die
+int godCount = 90;
 PImage power;
 PImage FIRSTimg;
 PImage SECimg;
@@ -119,6 +121,9 @@ void draw(){
     if (countdown > 0){
       displayPower();
       countdown--;
+    }
+    if (godCount > 0){
+      godCount--;
     }
   }
 }
@@ -380,7 +385,7 @@ void drawLives(){
 
 public void ghostKill(){
   if((player.x >= 29 && player.x <= 780) && (player.y >= 29 && player.y <= 780)){
-    if (lives > 0){
+    if (lives > 0 && notGodMode){
       if ((g1.x / 30) ==  (player.x / 30) && (g1.y / 30) == (player.y / 30) ){
         player.start();
         lives--;
@@ -519,10 +524,14 @@ void pUP(){
   if (pow.getPower(0).equals("boost")){
     //make character move faster
   }
-  if (pow.getPower(0).equals("god")){
-    lives++;
+  if (pow.getPower(0).equals("god")){//need a countdown
+    notGodMode = false;
+    if (godCount == 0){
+      notGodMode = true;
+    }
+    
   }
-  if (pow.getPower(0).equals("teleport")){
+  if (pow.getPower(0).equals("teleport")){//need to fix this
     if (map[mouseY/30][mouseX/30].identifier < 0 ){
       player.x = map[mouseY/30][mouseX/30].centerX;
       player.y = map[mouseY/30][mouseX/30].centerY;
@@ -530,6 +539,9 @@ void pUP(){
   }
   if (pow.getPower(0).equals("ghost")){
     g1.leaveSpawn();
+    g2.leaveSpawn();
+    g3.leaveSpawn();
+    g4.leaveSpawn();
   }
 }
 
