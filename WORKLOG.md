@@ -41,6 +41,14 @@
 - need to figure out how to get enemy movement working better
 - need to work on the game over screen and figure out a small bug with the text
 
+### date: May 31, 2023
+- no work done
+
+### date: June 1, 2023
+- finally figured out ghost movement to follow player
+- implemented way for ghosts to spawn intermittently
+- added another character
+
 
 
 ## GROUP MEMBER 2: Arlette Duran
