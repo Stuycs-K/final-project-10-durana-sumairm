@@ -39,7 +39,12 @@ public class ghost{
   public void move(){
     if(direction >= 0){
       if(x<0 || x>=790){
-        x+=2;
+        if(direction == dRIGHT){
+          x+=2;
+        }
+        if(direction == dLEFT){
+          x-=2;
+        }
       } else{
         if(direction == dRIGHT && map[(y/30)][((x+15)/30)].identifier < 0){
           x+=2;
@@ -57,7 +62,7 @@ public class ghost{
         x = 825;
       }
       if(x >= 840 && direction == dRIGHT){
-        x = -30;
+        x = -17;
       }
     }
   }

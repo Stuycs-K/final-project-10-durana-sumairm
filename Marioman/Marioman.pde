@@ -208,8 +208,10 @@ public void drawLevelMenu(){
 public void drawCharacterMenu(){
   PImage Mario;
   PImage PrincessPeach;
+  PImage Luigi;
   Mario = loadImage("Mario.png");
   PrincessPeach = loadImage("PrincessPeach.png");
+  Luigi = loadImage("Luigi.png");
   imageMode(CENTER);
   textAlign(CENTER,CENTER);
   fill(255);
@@ -236,9 +238,20 @@ public void drawCharacterMenu(){
   image(PrincessPeach,300,350,60,60);
   fill(255);
   text("Princess\nPeach",300,400);
-  fill(#f3cf34);
+  if(character.equals("Luigi")){
+    rectMode(CENTER);
+    fill(0);
+    stroke(#2121DE);
+    strokeWeight(4);
+    square(400,350,65);
+    rectMode(CORNER);
+  }
+  image(Luigi,400,350,60,60);
+  fill(255);
+  text("Luigi",400,400);
   noStroke();
   rectMode(CENTER);
+  fill(#f3cf34);
   rect(405,480,140,40);
   rectMode(CORNER);
   fill(0);
@@ -340,6 +353,9 @@ void mouseClicked(){
       }
       if(mouseX >= 240 && mouseX <= 360){
         character = "PrincessPeach";
+      }
+      if(mouseX >= 340 && mouseX <= 460){
+        character = "Luigi";
       }
     }
     if((mouseX >= 335 && mouseX <= 475) && (mouseY >= 460 && mouseY <= 500)){ // back button
