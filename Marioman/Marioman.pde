@@ -32,6 +32,7 @@ int lives = 3;
 
 //power-ups
 int countdown;
+int ghostCountdown = 900;
 powerUp pow = new powerUp();
 PImage power;
 PImage FIRSTimg;
@@ -106,20 +107,41 @@ void draw(){
     player.display();
     drawScore();
     g1.display();
-    ghostKill();
-    drawLives();
-    if(!g1.leftSpawn){
-      g1.leaveSpawn();
-    }
-    if(g1.direction < 0){
-      g1.findDirection();
-    }
-    g1.move();
-    println(g1.isCentered());
-    println(g1.x + " " + g1.y);
     g2.display();
     g3.display();
     g4.display();
+    ghostKill();
+    drawLives();
+    if(ghostCountdown%300 == 0){
+      freeGhost();
+    }
+    ghostCountdown--;
+    if(g1.leftSpawn){
+      g1.move();
+      if(g1.direction < 0 || g1.isCentered()){
+        g1.findDirection();
+      }
+    }
+    if(g2.leftSpawn){
+      g2.move();
+      if(g2.direction < 0 || g2.isCentered()){
+        g2.findDirection();
+      }
+    }
+    if(g3.leftSpawn){
+      g3.move();
+      if(g3.direction < 0 || g3.isCentered()){
+        g3.findDirection();
+      }
+    }
+    if(g4.leftSpawn){
+      g4.move();
+      if(g4.direction < 0 || g4.isCentered()){
+        g4.findDirection();
+      }
+    }
+    //println(g1.isCentered());
+    //println(g1.x + " " + g1.y);
     if (countdown > 0){
       displayPower();
       countdown--;
@@ -272,8 +294,6 @@ void mouseClicked(){
         levelSelection = false;
         playing = true;
         player = new character(character);
-        g1.leaveSpawn();
-        
       }
       if(mouseY >= 390 && mouseY <= 430){
         levelNum = 6;
@@ -514,6 +534,18 @@ void countScore(){
       pow.shufflePower();
       map[y/30][x/30].identifier = pixel.SPACE;
     }
+  }
+}
+
+void freeGhost(){
+  if(!g1.leftSpawn){
+    g1.leaveSpawn();
+  } else if(!g2.leftSpawn){
+    g2.leaveSpawn();
+  } else if(!g3.leftSpawn){
+    g3.leaveSpawn();
+  } else if(!g4.leftSpawn){
+    g4.leaveSpawn();
   }
 }
 

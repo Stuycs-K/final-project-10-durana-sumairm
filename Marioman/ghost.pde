@@ -26,19 +26,13 @@ public class ghost{
         direction = dLEFT;
       } else if(dX > 0 && map[y/30][(x+15)/30].identifier < 0){
         direction = dRIGHT;
-      } //else{
-      //  if(map[y/30][(x+15)/30].identifier < 0) direction = dRIGHT;
-      //  if(map[y/30][(x-16)/30].identifier < 0) direction = dLEFT;
-      //}
+      }
     } else if(isCentered()){
       if(dY < 0 && map[(y-16)/30][x/30].identifier < 0){
         direction = dUP;
       } else if(dY > 0 && map[(y+15)/30][x/30].identifier < 0){
         direction = dDOWN;
-      } //else{
-      //  if(map[(y+15)/30][x/30].identifier < 0) direction = dDOWN;
-      //  if(map[(y-16)/30][x/30].identifier < 0) direction = dUP;
-      //}
+      }
     }
   }
   
