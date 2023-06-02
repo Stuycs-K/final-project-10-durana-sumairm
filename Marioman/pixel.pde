@@ -3,6 +3,7 @@ public class pixel{
   private int y;
   private int centerX;
   private int centerY;
+  private float dist;
   public int identifier = -1; // default for an empty space
   private static final int SPACE = -1;
   private static final int VWALL = 0;
@@ -27,6 +28,14 @@ public class pixel{
     this.y = y1;
     centerX = this.x+15;
     centerY = this.y+15;
+  }
+  
+  public String toString(){
+    return centerX + " " + centerY;
+  }
+    
+  public void updateDist(){
+    dist = dist((float)centerX, (float)centerY, (float)player.x, (float)player.y);
   }
   
 // ==============================================================================================================

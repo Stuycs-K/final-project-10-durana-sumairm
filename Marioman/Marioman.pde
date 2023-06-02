@@ -19,7 +19,6 @@ int score = 0;
 
 //character stuff
 character player;
-boolean isCentered;
 PImage Bowser;
 ghost g1;
 PImage KingBoo;
@@ -33,7 +32,10 @@ int lives = 3;
 
 //power-ups
 int countdown;
+int ghostCountdown = 900;
 powerUp pow = new powerUp();
+boolean notGodMode = true; //if it is true then you can die
+int godCount = 90;
 PImage power;
 PImage FIRSTimg;
 PImage SECimg;
@@ -77,7 +79,7 @@ void setup(){
     x = 0;
     y+=30;
   }
-  
+
 }
 
 void draw(){
@@ -103,22 +105,51 @@ void draw(){
       }
     }
     player.move();
-    isCentered = player.isCentered();
-    println(isCentered);
     countScore();
     player.display();
     drawScore();
     g1.display();
-    ghostKill();
-    drawLives();
-    g1.move(player.x, player.y);
-    //println(g1.x + " " + g1.y);
     g2.display();
     g3.display();
     g4.display();
+    ghostKill();
+    drawLives();
+    if(ghostCountdown%300 == 0){
+      freeGhost();
+    }
+    ghostCountdown--;
+    if(g1.leftSpawn){
+      g1.move();
+      if(g1.direction < 0 || g1.isCentered()){
+        g1.findDirection();
+      }
+    }
+    if(g2.leftSpawn){
+      g2.move();
+      if(g2.direction < 0 || g2.isCentered()){
+        g2.findDirection();
+      }
+    }
+    if(g3.leftSpawn){
+      g3.move();
+      if(g3.direction < 0 || g3.isCentered()){
+        g3.findDirection();
+      }
+    }
+    if(g4.leftSpawn){
+      g4.move();
+      if(g4.direction < 0 || g4.isCentered()){
+        g4.findDirection();
+      }
+    }
+    //println(g1.isCentered());
+    //println(g1.x + " " + g1.y);
     if (countdown > 0){
       displayPower();
       countdown--;
+    }
+    if (godCount > 0){
+      godCount--;
     }
   }
 }
@@ -177,8 +208,10 @@ public void drawLevelMenu(){
 public void drawCharacterMenu(){
   PImage Mario;
   PImage PrincessPeach;
+  PImage Luigi;
   Mario = loadImage("Mario.png");
   PrincessPeach = loadImage("PrincessPeach.png");
+  Luigi = loadImage("Luigi.png");
   imageMode(CENTER);
   textAlign(CENTER,CENTER);
   fill(255);
@@ -205,9 +238,20 @@ public void drawCharacterMenu(){
   image(PrincessPeach,300,350,60,60);
   fill(255);
   text("Princess\nPeach",300,400);
-  fill(#f3cf34);
+  if(character.equals("Luigi")){
+    rectMode(CENTER);
+    fill(0);
+    stroke(#2121DE);
+    strokeWeight(4);
+    square(400,350,65);
+    rectMode(CORNER);
+  }
+  image(Luigi,400,350,60,60);
+  fill(255);
+  text("Luigi",400,400);
   noStroke();
   rectMode(CENTER);
+  fill(#f3cf34);
   rect(405,480,140,40);
   rectMode(CORNER);
   fill(0);
@@ -223,6 +267,7 @@ public void drawGameOver(){
   textFont(pixelFont);
   textAlign(CENTER,CENTER);
   textSize(70);
+  fill(255);
   text("GAME  OVER", 405, 370);
   imageMode(CENTER);
   image(power,410,380,70,70);
@@ -268,8 +313,6 @@ void mouseClicked(){
         levelSelection = false;
         playing = true;
         player = new character(character);
-        g1.leaveSpawn();
-        
       }
       if(mouseY >= 390 && mouseY <= 430){
         levelNum = 6;
@@ -310,6 +353,9 @@ void mouseClicked(){
       }
       if(mouseX >= 240 && mouseX <= 360){
         character = "PrincessPeach";
+      }
+      if(mouseX >= 340 && mouseX <= 460){
+        character = "Luigi";
       }
     }
     if((mouseX >= 335 && mouseX <= 475) && (mouseY >= 460 && mouseY <= 500)){ // back button
@@ -365,7 +411,7 @@ void keyPressed(){
   }
 }
 
-//=============================== CHARACTER KILLS
+//=============================== CHARACTER KILLS 
 
 void drawLives(){
   fill(0);
@@ -379,7 +425,7 @@ void drawLives(){
 
 public void ghostKill(){
   if((player.x >= 29 && player.x <= 780) && (player.y >= 29 && player.y <= 780)){
-    if (lives > 0){
+    if (lives > 0 && notGodMode){
       if ((g1.x / 30) ==  (player.x / 30) && (g1.y / 30) == (player.y / 30) ){
         player.start();
         lives--;
@@ -508,23 +554,62 @@ void countScore(){
     if (map[y/30][x/30].identifier == pixel.POWER){  
       countdown += 45;
       pow.shufflePower();
+      pUP();
       map[y/30][x/30].identifier = pixel.SPACE;
     }
   }
 }
 
+
+void freeGhost(){
+  if(!g1.leftSpawn){
+    g1.leaveSpawn();
+  } else if(!g2.leftSpawn){
+    g2.leaveSpawn();
+  } else if(!g3.leftSpawn){
+    g3.leaveSpawn();
+  } else if(!g4.leftSpawn){
+    g4.leaveSpawn();
+  }
+}
+
+void pUP(){
+  if (pow.getPower(0).equals("boost")){
+    //make character move faster
+  }
+  if (pow.getPower(0).equals("god")){//need a countdown
+    notGodMode = false;
+    if (godCount == 0){
+      notGodMode = true;
+    }
+    
+  }
+  if (pow.getPower(0).equals("teleport")){//need to fix this
+    if (map[mouseY/30][mouseX/30].identifier < 0 ){
+      player.x = map[mouseY/30][mouseX/30].centerX;
+      player.y = map[mouseY/30][mouseX/30].centerY;
+    }
+  }
+  if (pow.getPower(0).equals("ghost")){
+    g1.leaveSpawn();
+    g2.leaveSpawn();
+    g3.leaveSpawn();
+    g4.leaveSpawn();
+  }
+}
+
 boolean canMoveLeft(){
-  return (map[(player.y/30)][((player.x-16)/30)].identifier < 0 && isCentered);
+  return (map[(player.y/30)][((player.x-16)/30)].identifier < 0 && player.isCentered());
 }
 
 boolean canMoveDown(){
-  return (map[((player.y+15)/30)][(player.x/30)].identifier < 0 && isCentered);
+  return (map[((player.y+15)/30)][(player.x/30)].identifier < 0 && player.isCentered());
 }
 
 boolean canMoveUp(){
-  return (map[((player.y-16)/30)][(player.x/30)].identifier < 0 && isCentered);
+  return (map[((player.y-16)/30)][(player.x/30)].identifier < 0 && player.isCentered());
 }
 
 boolean canMoveRight(){
-  return (map[(player.y/30)][((player.x+15)/30)].identifier < 0 && isCentered);
+  return (map[(player.y/30)][((player.x+15)/30)].identifier < 0 && player.isCentered());
 }

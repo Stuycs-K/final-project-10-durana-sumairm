@@ -79,3 +79,10 @@
 ### date: May 30, 2023
 - display the amount of lives
 - created game over screen when you have 0 lives
+
+### date: May 31, 2023
+- work on powerUps and what they do
+- when player dies it restarts
+
+### date: June 1, 2023
+- continued working on powerUps
