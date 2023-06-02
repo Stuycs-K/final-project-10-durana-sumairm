@@ -3,8 +3,7 @@ public class character{
   private int y;
   private int direction;
   private PImage charImage;
-  private boolean isCentered;
-  private int[][] directions = new int[][]{{0,-2},{2,0},{0,2},{-2,0}};
+  //private int[][] directions = new int[][]{{0,-2},{2,0},{0,2},{-2,0}};
   public character(String selection){
     x = -27;
     y = 405;
@@ -16,16 +15,16 @@ public class character{
   public void move(){
     if(direction >= 0){
       if(x<0 || x>=790){
-        x+=directions[direction][0];
+        x+=2;
       } else{
         if(direction == dRIGHT && map[(y/30)][((x+15)/30)].identifier < 0){
-          x+=directions[direction][0];
+          x+=2;
         } else if(direction == dLEFT && map[(y/30)][((x-16)/30)].identifier < 0){
-          x+=directions[direction][0];
+          x-=2;
         } else if(direction == dDOWN && map[((y+15)/30)][(x/30)].identifier < 0){
-          y+=directions[direction][1];
+          y+=2;
         } else if(direction == dUP && map[((y-16)/30)][(x/30)].identifier < 0){
-          y+=directions[direction][1];
+          y-=2;
         } else{
           direction = -1;
         }
@@ -48,6 +47,7 @@ public class character{
   public void start(){
     x = -27;
     y = 405;
+    direction = dRIGHT;
   }
 
   public void display(){

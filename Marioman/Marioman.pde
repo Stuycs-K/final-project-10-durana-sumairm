@@ -76,7 +76,7 @@ void setup(){
     x = 0;
     y+=30;
   }
-  
+
 }
 
 void draw(){
@@ -102,16 +102,21 @@ void draw(){
       }
     }
     player.move();
-    player.isCentered = player.isCentered();
-    println(player.isCentered);
     countScore();
     player.display();
     drawScore();
     g1.display();
     ghostKill();
     drawLives();
-    g1.move(player.x, player.y);
-    //println(g1.x + " " + g1.y);
+    if(!g1.leftSpawn){
+      g1.leaveSpawn();
+    }
+    if(g1.direction < 0){
+      g1.findDirection();
+    }
+    g1.move();
+    println(g1.isCentered());
+    println(g1.x + " " + g1.y);
     g2.display();
     g3.display();
     g4.display();
@@ -513,17 +518,17 @@ void countScore(){
 }
 
 boolean canMoveLeft(){
-  return (map[(player.y/30)][((player.x-16)/30)].identifier < 0 && player.isCentered);
+  return (map[(player.y/30)][((player.x-16)/30)].identifier < 0 && player.isCentered());
 }
 
 boolean canMoveDown(){
-  return (map[((player.y+15)/30)][(player.x/30)].identifier < 0 && player.isCentered);
+  return (map[((player.y+15)/30)][(player.x/30)].identifier < 0 && player.isCentered());
 }
 
 boolean canMoveUp(){
-  return (map[((player.y-16)/30)][(player.x/30)].identifier < 0 && player.isCentered);
+  return (map[((player.y-16)/30)][(player.x/30)].identifier < 0 && player.isCentered());
 }
 
 boolean canMoveRight(){
-  return (map[(player.y/30)][((player.x+15)/30)].identifier < 0 && player.isCentered);
+  return (map[(player.y/30)][((player.x+15)/30)].identifier < 0 && player.isCentered());
 }
