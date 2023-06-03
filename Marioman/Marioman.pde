@@ -20,6 +20,7 @@ int score = 0;
 
 //character stuff
 character player;
+List<ghost> ghosts;
 PImage Bowser;
 ghost g1;
 PImage KingBoo;
@@ -64,11 +65,6 @@ void setup(){
   g3 = new ghost(450,405, Wario);
   Waluigi = loadImage("Waluigi.png");
   g4 = new ghost(420, 405, Waluigi);
-  List<ghost> ghosts = new ArrayList<ghost>();
-  ghosts.add(g1);
-  ghosts.add(g2);
-  ghosts.add(g3);
-  ghosts.add(g4);
   
   size(810,810);
  
@@ -125,27 +121,27 @@ void draw(){
     }
     ghostCountdown--;
     if(g1.leftSpawn){
-      g1.move(ghosts);
+      g1.move();
       if(g1.direction < 0 || g1.isCentered()){
-        g1.findDirection(ghosts);
+        g1.findDirection();
       }
     }
     if(g2.leftSpawn){
-      g2.move(ghosts);
+      g2.move();
       if(g2.direction < 0 || g2.isCentered()){
-        g2.findDirection(ghosts);
+        g2.findDirection();
       }
     }
     if(g3.leftSpawn){
-      g3.move(ghosts);
+      g3.move();
       if(g3.direction < 0 || g3.isCentered()){
-        g3.findDirection(ghosts);
+        g3.findDirection();
       }
     }
     if(g4.leftSpawn){
-      g4.move(ghosts);
+      g4.move();
       if(g4.direction < 0 || g4.isCentered()){
-        g4.findDirection(ghosts);
+        g4.findDirection();
       }
     }
     //println(g1.isCentered());
@@ -319,14 +315,6 @@ void mouseClicked(){
         levelSelection = false;
         playing = true;
         player = new character(character);
-        g1.x = 345;
-        g1.y = 405;
-        g2.x = 390;
-        g2.y = 405;
-        g3.x = 450;
-        g3.y = 405;
-        g4.x = 420;
-        g4.y = 405;
       }
       if(mouseY >= 390 && mouseY <= 430){
         levelNum = 6;
@@ -492,6 +480,14 @@ public void drawGhostSpawn(){
   map[15][10].identifier = pixel.BLCORNER;
   map[14][10].identifier = pixel.VWALL;
   map[13][10].identifier = pixel.VWALL;
+  g1.x = 345;
+  g1.y = 405;
+  g2.x = 390;
+  g2.y = 405;
+  g3.x = 450;
+  g3.y = 405;
+  g4.x = 420;
+  g4.y = 405;
 }
 
 public void drawBorder(){
@@ -588,10 +584,10 @@ void freeGhost(){
 }
 
 void pUP(){
-  if (pow.getPower(0).equals("boost")){
-    //make character move faster
+  if (pow.getPower(0).equals("boost")){//make character move faster
+    
   }
-  if (pow.getPower(0).equals("god")){//need a countdown
+  if (pow.getPower(0).equals("god")){
     notGodMode = false;
     if (godCount == 0){
       notGodMode = true;
@@ -599,10 +595,10 @@ void pUP(){
     
   }
   if (pow.getPower(0).equals("teleport")){//need to fix this
-    if (map[mouseY/30][mouseX/30].identifier < 0 ){
-      player.x = map[mouseY/30][mouseX/30].centerX;
-      player.y = map[mouseY/30][mouseX/30].centerY;
-    }
+    //if (map[mouseY/30][mouseX/30].identifier < 0 ){
+     // player.x = map[mouseY/30][mouseX/30].centerX;
+      //player.y = map[mouseY/30][mouseX/30].centerY;
+    //}
   }
   if (pow.getPower(0).equals("ghost")){
     //g1.leaveSpawn();

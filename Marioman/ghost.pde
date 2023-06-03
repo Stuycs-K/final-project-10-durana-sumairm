@@ -18,84 +18,59 @@ public class ghost{
       leftSpawn = true;
   }
   
-  public void findDirection(List<ghost> ghosts){
+  public void findDirection(){
     int dX = player.x - x;
     int dY = player.y - y;
-    if (isCentered() && Math.abs(dX) > Math.abs(dY)){
-      if (dX < 0){
-        if (canMove(x - 2, y, ghosts)){
-          direction = dLEFT;
-        }
-      } 
-      else if (dX > 0){
-        if (canMove(x + 2, y, ghosts)){
-          direction = dRIGHT;
-         }
+    if((isCentered() && (map[y/30][(x+15)/30].identifier < 0 || map[y/30][(x-16)/30].identifier < 0)) && (Math.abs(dX) > Math.abs(dY))){
+      if(dX < 0 && map[y/30][(x-16)/30].identifier < 0){
+        direction = dLEFT;
+      } else if(dX > 0 && map[y/30][(x+15)/30].identifier < 0){
+        direction = dRIGHT;
       }
-     } 
-     else if (isCentered()){
-       if (dY < 0){
-          if (canMove(x, y - 2, ghosts)){
-            direction = dUP;
-          }
-        } 
-        else if (dY > 0){
-          if (canMove(x, y + 2, ghosts)){
-            direction = dDOWN;
-          }
-        }
-     }
+    } else if(isCentered()){
+      if(dY < 0 && map[(y-16)/30][x/30].identifier < 0){
+        direction = dUP;
+      } else if(dY > 0 && map[(y+15)/30][x/30].identifier < 0){
+        direction = dDOWN;
+      }
+    }
   }
   
-  public void move(List<ghost> ghosts){
-    if (direction >= 0){
-      if (x < 0 || x >= 790){
-        if (direction == dRIGHT){
-          x += 2;
+  public void move(){
+    if(direction >= 0){
+      if(x<0 || x>=790){
+        if(direction == dRIGHT){
+          x++;
         }
-        if (direction == dLEFT){
-          x -= 2;
+        if(direction == dLEFT){
+          x--;
         }
-      } 
-      else{
-        if (direction == dRIGHT && canMove(x + 2, y, ghosts)){
-          x += 2;
-         } 
-         else if (direction == dLEFT && canMove(x - 2, y, ghosts)){
-           x -= 2;
-         } 
-         else if (direction == dDOWN && canMove(x, y + 2, ghosts)){
-           y += 2;
-         } 
-         else if (direction == dUP && canMove(x, y - 2, ghosts)){
-           y -= 2;
-         } 
-         else{
-           direction = -1;
-          }
+      } else{
+        if(direction == dRIGHT && map[(y/30)][((x+15)/30)].identifier < 0){
+          x++;
+        } else if(direction == dLEFT && map[(y/30)][((x-16)/30)].identifier < 0){
+          x--;
+        } else if(direction == dDOWN && map[((y+15)/30)][(x/30)].identifier < 0){
+          y++;
+        } else if(direction == dUP && map[((y-16)/30)][(x/30)].identifier < 0){
+          y--;
+        } else{
+          direction = -1;
         }
-        if (direction == dLEFT && x <= -16){
-          x = 825;
-         }
-         if (x >= 840 && direction == dRIGHT){
-           x = -17;
-         }
-       }
+      }
+      if(direction == dLEFT && x<=-16){
+        x = 825;
+      }
+      if(x >= 840 && direction == dRIGHT){
+        x = -17;
+      }
+    }
   }
   
   public boolean isCentered(){
     if((x >= 30 && x <= 780) && (y >= 30 && y <= 780)){
       return(x == map[y/30][x/30].centerX && y == map[y/30][x/30].centerY);
     } return false;
-  }
-  
-  public boolean canMove(int newX, int newY, List<ghost> ghosts){
-    for (ghost g : ghosts){
-       if (g != this && Math.abs(newX - g.x) < 30 && Math.abs(newY - g.y) < 30){
-          return false; 
-       }
-     }
-    return map[newY/30][newX/30].identifier < 0; 
   }
 
   public void display(){
