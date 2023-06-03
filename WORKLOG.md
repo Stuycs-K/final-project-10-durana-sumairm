@@ -94,3 +94,10 @@
 
 ### date: June 1, 2023
 - continued working on powerUps
+
+### date: June 2, 2023
+- no work done
+
+### date: June 3, 2023
+- tweaked ghost movement
+- changed lives display so that it also shows pictures of character
