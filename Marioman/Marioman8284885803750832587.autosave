@@ -1,6 +1,7 @@
+import java.util.*;
 //menus
-boolean mainMenu = true; //<>//
-boolean playing = false; //<>//
+boolean mainMenu = true;
+boolean playing = false;
 boolean levelSelection = false;
 boolean characterSelection = false;
 boolean overScreen = false;
@@ -37,8 +38,8 @@ int ghostCountdown = 900;
 powerUp pow = new powerUp();
 boolean notGodMode = true; //if it is true then you can die
 int godCount = 90;
-PImage power; //<>//
-PImage FIRSTimg; //<>//
+PImage power;
+PImage FIRSTimg;
 PImage SECimg;
 PImage THIRDimg;
 PImage FOURTHimg;
@@ -481,12 +482,16 @@ public void drawGhostSpawn(){
   map[13][10].identifier = pixel.VWALL;
   g1.x = 345;
   g1.y = 405;
+  g1.leftSpawn = false;
   g2.x = 390;
   g2.y = 405;
+  g2.leftSpawn = false;
   g3.x = 450;
   g3.y = 405;
+  g3.leftSpawn = false;
   g4.x = 420;
   g4.y = 405;
+  g4.leftSpawn = false;
 }
 
 public void drawBorder(){
@@ -600,18 +605,10 @@ void pUP(){
     //}
   }
   if (pow.getPower(0).equals("ghost")){
-    g1.x = 345;
-    g1.y = 405;
-    g2.x = 390;
-    g2.y = 405;
-    g3.x = 450;
-    g3.y = 405;
-    g4.x = 420;
-    g4.y = 405;
-    g1.leftSpawn = false;
-    g2.leftSpawn = false;
-    g3.leftSpawn = false;
-    g4.leftSpawn = false;
+    //g1.leaveSpawn();
+    //g2.leaveSpawn();
+    //g3.leaveSpawn();
+    //g4.leaveSpawn();
   }
 }
 
