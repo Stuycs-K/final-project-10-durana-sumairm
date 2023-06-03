@@ -18,6 +18,10 @@ pixel[][] map = new pixel[27][27];
 int score = 0;
 
 //character stuff
+PImage Mario;
+PImage PrincessPeach;
+PImage Luigi;
+PImage pla; //player for lives display
 character player;
 List<ghost> ghosts;
 PImage Bowser;
@@ -34,11 +38,11 @@ int lives = 3;
 //power-ups
 int countdown;
 int ghostCountdown = 900;
-powerUp pow = new powerUp();
+powerUp pow = new powerUp(); //<>//
 boolean notGodMode = true; //if it is true then you can die
 int godCount = 90;
 PImage power; //<>//
-PImage FIRSTimg; //<>//
+PImage FIRSTimg;
 PImage SECimg;
 PImage THIRDimg;
 PImage FOURTHimg;
@@ -207,9 +211,6 @@ public void drawLevelMenu(){
 }
 
 public void drawCharacterMenu(){
-  PImage Mario;
-  PImage PrincessPeach;
-  PImage Luigi;
   Mario = loadImage("Mario.png");
   PrincessPeach = loadImage("PrincessPeach.png");
   Luigi = loadImage("Luigi.png");
@@ -415,13 +416,25 @@ void keyPressed(){
 //=============================== CHARACTER KILLS 
 
 void drawLives(){
+  pla = loadImage(character.toString() + ".png");
   fill(0);
-  rect(0, 785, 150, 20);
+  rect(0, 785, 230, 20);
   fill(255);
   textFont(pixelFont);
   textSize(14);
   text("LIVES: " + lives, 5, 801);
-
+  if (lives == 3){    
+    image(pla, 140, 797, 15, 15);
+    image(pla, 175, 797, 15, 15);
+    image(pla, 205, 797, 15, 15);
+  }
+  if (lives == 2){    
+    image(pla, 140, 797, 15, 15);
+    image(pla, 175, 797, 15, 15);
+  }
+  if (lives == 1){    
+    image(pla, 140, 797, 15, 15);
+  }
 }
 
 public void ghostKill(){
@@ -584,7 +597,6 @@ void freeGhost(){
 
 void pUP(){
   if (pow.getPower(0).equals("boost")){//make character move faster
-    
   }
   if (pow.getPower(0).equals("god")){
     notGodMode = false;
@@ -594,10 +606,6 @@ void pUP(){
     
   }
   if (pow.getPower(0).equals("teleport")){//need to fix this
-    //if (map[mouseY/30][mouseX/30].identifier < 0 ){
-     // player.x = map[mouseY/30][mouseX/30].centerX;
-      //player.y = map[mouseY/30][mouseX/30].centerY;
-    //}
   }
   if (pow.getPower(0).equals("ghost")){
     g1.x = 345;
