@@ -308,7 +308,7 @@ void mouseClicked(){
     drawBorder();
     if(mouseX >= 30 && mouseX <= 170){
       if(mouseY >= 330 && mouseY <= 370){
-        levelNum = 1;
+        levelNum = 4;
         drawMaze();
         drawGhostSpawn();
         drawLives();
