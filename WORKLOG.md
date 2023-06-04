@@ -101,3 +101,6 @@
 ### date: June 3, 2023
 - tweaked ghost movement
 - changed lives display so that it also shows pictures of character
+
+### date: June 4, 2023
+- created 2 more levels (level 3 & 4)
