@@ -619,6 +619,12 @@ void pUP(){
     
   }
   if (pow.getPower(0).equals("teleport")){
+    int indX = (int) random(27);
+    int indY = (int) random(27);
+    if (map[indX][indY].identifier < 0){
+      player.x = map[indX][indY].centerX;
+      player.y = map[indX][indY].centerY;
+    }
   }
   if (pow.getPower(0).equals("ghost")){
     g1.x = 345;
