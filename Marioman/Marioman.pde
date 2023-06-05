@@ -308,7 +308,7 @@ void mouseClicked(){
     drawBorder();
     if(mouseX >= 30 && mouseX <= 170){
       if(mouseY >= 330 && mouseY <= 370){
-        levelNum = 4;
+        levelNum = 1;
         drawMaze();
         drawGhostSpawn();
         drawLives();
@@ -596,7 +596,20 @@ void freeGhost(){
 }
 
 void pUP(){
-  if (pow.getPower(0).equals("boost")){//make character move faster
+  if (pow.getPower(0).equals("boost")){
+    if (player.direction == dDOWN){
+      player.y += 16;
+    }
+    if (player.direction == dUP){
+      player.y -= 16;
+    }
+    if (player.direction == dLEFT){
+      player.x -= 16;
+    }
+    if (player.direction == dRIGHT){
+      player.x += 16;
+    }
+    
   }
   if (pow.getPower(0).equals("god")){
     notGodMode = false;
@@ -605,7 +618,7 @@ void pUP(){
     }
     
   }
-  if (pow.getPower(0).equals("teleport")){//need to fix this
+  if (pow.getPower(0).equals("teleport")){
   }
   if (pow.getPower(0).equals("ghost")){
     g1.x = 345;
