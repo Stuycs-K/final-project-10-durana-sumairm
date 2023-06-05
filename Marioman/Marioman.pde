@@ -1,9 +1,10 @@
 //menus
-boolean mainMenu = true; //<>//
-boolean playing = false; //<>//
+boolean mainMenu = true; //<>// //<>//
+boolean playing = false; //<>// //<>//
 boolean levelSelection = false;
 boolean characterSelection = false;
 boolean overScreen = false;
+boolean winScreen = false;
 
 //directions
 final int dUP = 0;
@@ -37,10 +38,10 @@ int lives = 3;
 
 //power-ups
 int countdown;
-int ghostCountdown = 900;
+int ghostCountdown = 900; //<>//
 powerUp pow = new powerUp(); //<>//
 boolean notGodMode = true; //if it is true then you can die
-int godCount = 90;
+int godCount = 90; //<>//
 PImage power; //<>//
 PImage FIRSTimg;
 PImage SECimg;
@@ -107,7 +108,7 @@ void draw(){
     for(int i = 0; i < map.length; i++){
       for(int j = 0; j < map[0].length; j++){
         map[i][j].drawPixel();
-      }
+      }     
     }
     player.move();
     countScore();
@@ -155,6 +156,10 @@ void draw(){
     }
     if (godCount > 0){
       godCount--;
+    }
+    if (isDone() || winScreen){
+    playing = false;
+    drawWin();
     }
   }
 }
@@ -291,6 +296,27 @@ public void drawGameOver(){
   textAlign(LEFT,BASELINE);
 }
 
+public void drawWin(){
+  winScreen = true;
+  background(0);
+  textFont(pixelFont);
+  textAlign(CENTER,CENTER);
+  textSize(70);
+  fill(255);
+  text("WINNER", 405, 370);
+  
+  fill(#f3cf34);
+  noStroke();
+  rectMode(CENTER);
+  rect(405,480,240,60);
+  rectMode(CORNER);
+  fill(0);
+  textSize(20);
+  text("PLAY AGAIN",405,475);
+  imageMode(CORNER);
+  textAlign(LEFT,BASELINE);
+}
+
 //=============================== MENU FUNCTIONALITY & PLAYER CONTROLS
 
 void mouseClicked(){
@@ -368,6 +394,13 @@ void mouseClicked(){
   if (overScreen){
     if ((mouseY >= 410 && mouseY <= 510) && (mouseX >= 285 && mouseX <= 525)){
       overScreen = false;
+      lives = 3;
+      mainMenu = true;
+    }
+  }
+  if (winScreen){
+    if ((mouseY >= 410 && mouseY <= 510) && (mouseX >= 285 && mouseX <= 525)){
+      winScreen = false;
       lives = 3;
       mainMenu = true;
     }
@@ -534,6 +567,17 @@ public void drawBorder(){
   map[12][26].identifier = pixel.BLCORNER;
   map[13][26].identifier = pixel.SPACE;
   map[14][26].identifier = pixel.TLCORNER;
+}
+
+boolean isDone(){ //checks if all the coins have been collected
+  for (int i = 0; i < 27; i++){
+    for (int j = 0; j < 27; j++){
+      if (map[i][j].identifier == pixel.COIN){
+        return false;
+      }
+    }
+  }
+  return true;
 }
 
 void displayPower(){
