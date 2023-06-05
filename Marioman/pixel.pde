@@ -123,9 +123,12 @@ public class pixel{
     }
     
     if(identifier == COIN){
-      fill(#DEA185);
-      stroke(#DEA185);
-      square(x+12.5, y+12.5, 5);
+      fill(#FAE73A);
+      stroke(#B9AD36);
+      square(x+11.5, y+11.5, 7);
+      fill(#E3CC59);
+      stroke(255);
+      rect(x+12.5, y+12.5, 1, 3);
     }
     if(identifier == POWER){
       POWERimg = loadImage("Power.png");
