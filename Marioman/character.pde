@@ -3,7 +3,6 @@ public class character{
   private int y;
   private int direction;
   private PImage charImage;
-  //private int[][] directions = new int[][]{{0,-2},{2,0},{0,2},{-2,0}};
   public character(String selection){
     x = -27;
     y = 405;

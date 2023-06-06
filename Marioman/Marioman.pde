@@ -38,7 +38,7 @@ int lives = 3;
 
 //power-ups
 int countdown;
-int ghostCountdown = 900; //<>//
+int ghostCountdown = 1199; //<>//
 powerUp pow = new powerUp(); //<>//
 boolean notGodMode = true; //if it is true then you can die
 int godCount = 90; //<>//
@@ -104,7 +104,6 @@ void draw(){
     drawGameOver();
   }
   if(playing){
-    background(0);
     for(int i = 0; i < map.length; i++){
       for(int j = 0; j < map[0].length; j++){
         map[i][j].drawPixel();
@@ -123,7 +122,9 @@ void draw(){
     if(ghostCountdown%300 == 0){
       freeGhost();
     }
-    ghostCountdown--;
+    if(ghostCountdown > 0){
+      ghostCountdown--;
+    }
     if(g1.leftSpawn){
       g1.move();
       if(g1.direction < 0 || g1.isCentered()){
@@ -148,8 +149,6 @@ void draw(){
         g4.findDirection();
       }
     }
-    //println(g1.isCentered());
-    //println(g1.x + " " + g1.y);
     if (countdown > 0){
       displayPower();
       countdown--;
@@ -157,11 +156,29 @@ void draw(){
     if (godCount > 0){
       godCount--;
     }
-    if (isDone() || winScreen){
-    playing = false;
-    drawWin();
+    if(isDone()){
+      playing = false;
+      winScreen = true;
+      drawWin();
     }
   }
+  if (winScreen){
+      drawWin();
+  }
+}
+
+void reset(){
+  mainMenu = true;
+  ghostCountdown = 1199;
+  lives = 3;
+  g1.leftSpawn = false;
+  g2.leftSpawn = false;
+  g3.leftSpawn = false;
+  g4.leftSpawn = false;
+  g1.x = 345; g1.y = 405;
+  g2.x = 390; g2.y = 405;
+  g3.x = 450; g3.y = 405;
+  g4.x = 420; g4.y = 405;
 }
 
 
@@ -297,8 +314,6 @@ public void drawGameOver(){
 }
 
 public void drawWin(){
-  winScreen = true;
-  background(0);
   textFont(pixelFont);
   textAlign(CENTER,CENTER);
   textSize(70);
@@ -394,15 +409,13 @@ void mouseClicked(){
   if (overScreen){
     if ((mouseY >= 410 && mouseY <= 510) && (mouseX >= 285 && mouseX <= 525)){
       overScreen = false;
-      lives = 3;
-      mainMenu = true;
+      reset();
     }
   }
   if (winScreen){
     if ((mouseY >= 410 && mouseY <= 510) && (mouseX >= 285 && mouseX <= 525)){
       winScreen = false;
-      lives = 3;
-      mainMenu = true;
+      reset();
     }
   }
 }
@@ -683,6 +696,7 @@ void pUP(){
     g2.leftSpawn = false;
     g3.leftSpawn = false;
     g4.leftSpawn = false;
+    ghostCountdown = 1199;
   }
 }
 

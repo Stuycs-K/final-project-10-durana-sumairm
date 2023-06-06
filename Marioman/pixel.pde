@@ -3,6 +3,7 @@ public class pixel{
   private int y;
   private int centerX;
   private int centerY;
+  private boolean ghostOn;
   private float dist;
   public int identifier = -1; // default for an empty space
   private static final int SPACE = -1;
