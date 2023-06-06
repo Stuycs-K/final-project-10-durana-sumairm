@@ -38,7 +38,7 @@ int lives = 3;
 
 //power-ups
 int countdown;
-int ghostCountdown = 900; //<>//
+int ghostCountdown = 1199; //<>//
 powerUp pow = new powerUp(); //<>//
 boolean notGodMode = true; //if it is true then you can die
 int godCount = 90; //<>//
@@ -169,7 +169,7 @@ void draw(){
 
 void reset(){
   mainMenu = true;
-  ghostCountdown = 900;
+  ghostCountdown = 1199;
   lives = 3;
   g1.leftSpawn = false;
   g2.leftSpawn = false;
@@ -696,7 +696,7 @@ void pUP(){
     g2.leftSpawn = false;
     g3.leftSpawn = false;
     g4.leftSpawn = false;
-    ghostCountdown = 900;
+    ghostCountdown = 1199;
   }
 }
 
