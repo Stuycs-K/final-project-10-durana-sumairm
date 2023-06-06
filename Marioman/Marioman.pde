@@ -104,7 +104,6 @@ void draw(){
     drawGameOver();
   }
   if(playing){
-    background(0);
     for(int i = 0; i < map.length; i++){
       for(int j = 0; j < map[0].length; j++){
         map[i][j].drawPixel();
@@ -148,8 +147,6 @@ void draw(){
         g4.findDirection();
       }
     }
-    //println(g1.isCentered());
-    //println(g1.x + " " + g1.y);
     if (countdown > 0){
       displayPower();
       countdown--;
@@ -157,10 +154,14 @@ void draw(){
     if (godCount > 0){
       godCount--;
     }
-    if (isDone() || winScreen){
-    playing = false;
-    drawWin();
+    if(isDone()){
+      playing = false;
+      winScreen = true;
+      drawWin();
     }
+  }
+  if (winScreen){
+      drawWin();
   }
 }
 
@@ -297,8 +298,6 @@ public void drawGameOver(){
 }
 
 public void drawWin(){
-  winScreen = true;
-  background(0);
   textFont(pixelFont);
   textAlign(CENTER,CENTER);
   textSize(70);
