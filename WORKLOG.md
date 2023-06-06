@@ -123,3 +123,6 @@
 - fixed powerups so now all powerups should function properly and do their respective thing
 - created win screen
 - updated how coins look
+
+### date: June 6, 2023
+- worked on levels 5 & 6
