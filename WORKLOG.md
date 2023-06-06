@@ -49,6 +49,20 @@
 - implemented way for ghosts to spawn intermittently
 - added another character
 
+### date: June 2, 2023
+- no work done
+
+### date: June 3, 2023
+- no work done
+
+### date: June 4, 2023
+- no work done
+
+### date: June 5, 2023
+- got the win screen working correctly
+- added in a reset() helper method to help with resetting the game easily upon game over/win
+- modified ghost countdown so that ghosts dont start immediately to emulate real pacman
+- began working on a way to deal with overlapping ghosts
 
 
 ## GROUP MEMBER 2: Arlette Duran
