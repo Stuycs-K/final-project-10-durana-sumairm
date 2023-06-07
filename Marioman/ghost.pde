@@ -2,6 +2,7 @@ import java.util.*;
 public class ghost{
   private int x;
   private int y;
+  private int ghostNum; 
   private int direction = -1;
   private PImage ghostImage;
   boolean leftSpawn = false;
@@ -37,24 +38,47 @@ public class ghost{
   }
   
   public void move(){
-    map[x/30][y/30].ghostOn = true;
     if(direction >= 0){
       if(x<0 || x>=790){
         if(direction == dRIGHT){
-          x++;
+          if(map[y/30][(x+1)/30].ghostOn != pixel.noGhost && map[y/30][(x+1)/30].ghostOn != this.ghostNum){
+            direction = dLEFT;
+          } else{
+            x++;
+          }
         }
         if(direction == dLEFT){
-          x--;
+          if(map[y/30][(x-1)/30].ghostOn != pixel.noGhost && map[y/30][(x-1)/30].ghostOn != this.ghostNum){
+            direction = dRIGHT;
+          } else{
+            x--;
+          }
         }
       } else{
         if(direction == dRIGHT && map[(y/30)][((x+15)/30)].identifier < 0){
-          x++;
+          if(map[y/30][(x+1)/30].ghostOn != pixel.noGhost && map[y/30][(x+1)/30].ghostOn != this.ghostNum){
+            direction = dLEFT;
+          } else{
+            x++;
+          }
         } else if(direction == dLEFT && map[(y/30)][((x-16)/30)].identifier < 0){
-          x--;
+          if(map[y/30][(x-1)/30].ghostOn != pixel.noGhost && map[y/30][(x-1)/30].ghostOn != this.ghostNum){
+            direction = dRIGHT;
+          } else{
+            x--;
+          }
         } else if(direction == dDOWN && map[((y+15)/30)][(x/30)].identifier < 0){
-          y++;
+          if(map[(y+1)/30][x/30].ghostOn != pixel.noGhost && map[(y+1)/30][x/30].ghostOn != this.ghostNum){
+            direction = dUP;
+          } else{
+            y++;
+          }
         } else if(direction == dUP && map[((y-16)/30)][(x/30)].identifier < 0){
-          y--;
+          if(map[(y-1)/30][x/30].ghostOn != pixel.noGhost && map[(y-1)/30][x/30].ghostOn != this.ghostNum){
+            direction = dDOWN;
+          } else{
+            y--;
+          }
         } else{
           direction = -1;
         }
@@ -66,11 +90,7 @@ public class ghost{
         x = -17;
       }
     }
-  }
-  
-  public void repelGhosts(){
-    
-  }
+  } 
   
   public boolean isCentered(){
     if((x >= 30 && x <= 780) && (y >= 30 && y <= 780)){

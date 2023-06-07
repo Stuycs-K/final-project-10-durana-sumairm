@@ -1,10 +1,14 @@
 public class pixel{
+  private static final int noGhost = 0;
+  private static final int g1 = 1;
+  private static final int g2 = 2;
+  private static final int g3 = 3;
+  private static final int g4 = 4;
   private int x;
   private int y;
   private int centerX;
   private int centerY;
-  private boolean ghostOn;
-  private float dist;
+  private int ghostOn;
   public int identifier = -1; // default for an empty space
   private static final int SPACE = -1;
   private static final int VWALL = 0;
@@ -21,7 +25,6 @@ public class pixel{
   private static final int INVISWALL = 100; //for the ghost entrance/exit
   private static final int COIN = -2; // every empty space starts off as a coin (per pacman game)
   private static final int POWER = -3; // scattered in corners of the maps
-  private PImage COINimg;
   private PImage POWERimg;
   
   public pixel(int x1, int y1){
@@ -33,10 +36,6 @@ public class pixel{
   
   public String toString(){
     return centerX + " " + centerY;
-  }
-    
-  public void updateDist(){
-    dist = dist((float)centerX, (float)centerY, (float)player.x, (float)player.y);
   }
   
 // ==============================================================================================================

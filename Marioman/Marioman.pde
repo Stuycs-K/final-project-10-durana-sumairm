@@ -63,12 +63,16 @@ void setup(){
   //load enemies
   Bowser = loadImage("Bowser.png");
   g1 = new ghost(345,405, Bowser);
+  g1.ghostNum = pixel.g1;
   KingBoo = loadImage("KingBoo.png");
   g2 = new ghost(390,405, KingBoo);
+  g2.ghostNum = pixel.g2;
   Wario = loadImage("Wario.png");
   g3 = new ghost(450,405, Wario);
+  g3.ghostNum = pixel.g3;
   Waluigi = loadImage("Waluigi.png");
   g4 = new ghost(420, 405, Waluigi);
+  g4.ghostNum = pixel.g4;
   
   size(810,810);
  
@@ -107,7 +111,18 @@ void draw(){
     for(int i = 0; i < map.length; i++){
       for(int j = 0; j < map[0].length; j++){
         map[i][j].drawPixel();
-      }     
+        if(g1.y/30 == i || g1.x/30 == j){
+          map[i][j].ghostOn = pixel.g1;
+        } else if(g2.y/30 == i || g2.x/30 == j){
+          map[i][j].ghostOn = pixel.g2;
+        } else if(g3.y/30 == i || g3.x/30 == j){
+          map[i][j].ghostOn = pixel.g3;
+        } else if(g4.y/30 == i || g4.x/30 == j){
+          map[i][j].ghostOn = pixel.g4;
+        } else{
+          map[i][j].ghostOn = pixel.noGhost;
+        }
+      }
     }
     player.move();
     countScore();
@@ -673,7 +688,6 @@ void pUP(){
     if (godCount == 0){
       notGodMode = true;
     }
-    
   }
   if (pow.getPower(0).equals("teleport")){
     int indX = (int) random(27);
