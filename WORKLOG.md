@@ -64,6 +64,9 @@
 - modified ghost countdown so that ghosts dont start immediately to emulate real pacman
 - began working on a way to deal with overlapping ghosts
 
+### date: June 6, 2023
+- worked on overlapping of ghosts, but not entirely functional
+
 
 ## GROUP MEMBER 2: Arlette Duran
 
