@@ -361,6 +361,7 @@ void mouseClicked(){
         levelNum = 6;
         drawMaze();
         drawGhostSpawn();
+        drawLives();
         levelSelection = false;
         playing = true;
         player = new character(character);
@@ -371,6 +372,7 @@ void mouseClicked(){
         levelNum = 2;
         drawMaze();
         drawGhostSpawn();
+        drawLives();
         levelSelection = false;
         playing = true;
         player = new character(character);
@@ -379,11 +381,73 @@ void mouseClicked(){
         levelNum = 7;
         drawMaze();
         drawGhostSpawn();
+        drawLives();
         levelSelection = false;
         playing = true;
         player = new character(character);
       }
     }
+    if (mouseX >= 332 && mouseX <= 472){
+      if(mouseY >= 330 && mouseY <= 370 ){
+        levelNum = 3;
+        drawMaze();
+        drawGhostSpawn();
+        drawLives();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+      if(mouseY >= 390 && mouseY <= 430){
+        levelNum = 8;
+        drawMaze();
+        drawGhostSpawn();
+        drawLives();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+    }
+    if (mouseX >= 483 && mouseX <= 623){
+      if(mouseY >= 330 && mouseY <= 370 ){
+        levelNum = 4;
+        drawMaze();
+        drawGhostSpawn();
+        drawLives();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+      if(mouseY >= 390 && mouseY <= 430){
+        levelNum = 9;
+        drawMaze();
+        drawGhostSpawn();
+        drawLives();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+    }
+    if (mouseX >= 634 && mouseX <= 774){
+      if(mouseY >= 330 && mouseY <= 370 ){
+        levelNum = 5;
+        drawMaze();
+        drawGhostSpawn();
+        drawLives();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+      if(mouseY >= 390 && mouseY <= 430){
+        levelNum = 10;
+        drawMaze();
+        drawGhostSpawn();
+        drawLives();
+        levelSelection = false;
+        playing = true;
+        player = new character(character);
+      }
+    }
+    
     if((mouseX >= 335 && mouseX <= 475) && (mouseY >= 460 && mouseY <= 500)){ // back button
       levelSelection = false;
       mainMenu = true;
