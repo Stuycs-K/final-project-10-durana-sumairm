@@ -129,3 +129,9 @@
 
 ### date: June 6, 2023
 - worked on levels 5 & 6
+
+### date: June 7, 2023
+- worked on level 7
+
+### date: June 8, 2023
+- finished levels 7-10 (all levels are complete)
