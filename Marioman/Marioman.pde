@@ -35,6 +35,7 @@ PImage Waluigi;
 ghost g4;
 String character = "Mario";
 int lives = 3;
+PImage win;
 
 //power-ups
 int countdown;
@@ -314,10 +315,17 @@ public void drawGameOver(){
 }
 
 public void drawWin(){
+  win = loadImage("Win.png");
+  imageMode(CENTER);
+  image(win, 405, 405, 810, 810);
+  rectMode(CENTER);
+  fill(255);
+  stroke(255);
+  rect(410,380, 600, 110);
   textFont(pixelFont);
   textAlign(CENTER,CENTER);
-  textSize(70);
-  fill(255);
+  textSize(100);
+  fill(0);
   text("WINNER", 405, 370);
   
   fill(#f3cf34);
