@@ -1,6 +1,6 @@
 //menus
-boolean mainMenu = true; //<>// //<>//
-boolean playing = false; //<>// //<>//
+boolean mainMenu = true; //<>// //<>// //<>//
+boolean playing = false; //<>// //<>// //<>//
 boolean levelSelection = false;
 boolean characterSelection = false;
 boolean overScreen = false;
@@ -22,6 +22,8 @@ int score = 0;
 PImage Mario;
 PImage PrincessPeach;
 PImage Luigi;
+PImage Toad;
+PImage Rosalina;
 PImage pla; //player for lives display
 character player;
 List<ghost> ghosts;
@@ -36,11 +38,11 @@ ghost g4;
 String character = "Mario";
 int lives = 3;
 PImage win;
-
-//power-ups
+ //<>//
+//power-ups //<>//
 int countdown;
-int ghostCountdown = 1199; //<>//
-powerUp pow = new powerUp(); //<>//
+int ghostCountdown = 1199; //<>// //<>//
+powerUp pow = new powerUp(); //<>// //<>//
 boolean notGodMode = true; //if it is true then you can die
 int godCount = 90; //<>//
 PImage power; //<>//
@@ -237,6 +239,8 @@ public void drawCharacterMenu(){
   Mario = loadImage("Mario.png");
   PrincessPeach = loadImage("PrincessPeach.png");
   Luigi = loadImage("Luigi.png");
+  Toad = loadImage("Toad.png");
+  Rosalina = loadImage("Rosalina.png");
   imageMode(CENTER);
   textAlign(CENTER,CENTER);
   fill(255);
@@ -274,6 +278,28 @@ public void drawCharacterMenu(){
   image(Luigi,400,350,60,60);
   fill(255);
   text("Luigi",400,400);
+  if(character.equals("Toad")){
+    rectMode(CENTER);
+    fill(0);
+    stroke(#2121DE);
+    strokeWeight(4);
+    square(500,350,65);
+    rectMode(CORNER);
+  }
+  image(Toad,500,350,60,60);
+  fill(255);
+  text("Toad",500,400);
+  if(character.equals("Rosalina")){
+    rectMode(CENTER);
+    fill(0);
+    stroke(#2121DE);
+    strokeWeight(4);
+    square(600,350,65);
+    rectMode(CORNER);
+  }
+  image(Rosalina,600,350,60,60);
+  fill(255);
+  text("Rosalina",600,400);
   noStroke();
   rectMode(CENTER);
   fill(#f3cf34);
@@ -471,6 +497,12 @@ void mouseClicked(){
       }
       if(mouseX >= 340 && mouseX <= 460){
         character = "Luigi";
+      }
+      if(mouseX >= 440 && mouseX <= 560){
+        character = "Toad";
+      }
+      if(mouseX >= 540 && mouseX <= 660){
+        character = "Rosalina";
       }
     }
     if((mouseX >= 335 && mouseX <= 475) && (mouseY >= 460 && mouseY <= 500)){ // back button

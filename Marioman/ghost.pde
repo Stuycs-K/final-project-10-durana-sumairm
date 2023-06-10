@@ -44,7 +44,6 @@ public class ghost{
   }
   
   public void move(){
-    map[x/30][y/30].ghostOn = true;
     if(direction >= 0){
       if(x<0 || x>=790){
         if(direction == dRIGHT){
