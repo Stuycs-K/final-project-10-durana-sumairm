@@ -19,6 +19,7 @@ public class ghost{
   }
   
   public void findDirection(){
+    int[][] directions = {{-16,0},{0,15},{15,0},{0,-16}};
     int dX = player.x - x;
     int dY = player.y - y;
     if((isCentered() && (map[y/30][(x+15)/30].identifier < 0 || map[y/30][(x-16)/30].identifier < 0)) && (Math.abs(dX) > Math.abs(dY))){
@@ -34,10 +35,15 @@ public class ghost{
         direction = dDOWN;
       }
     }
+    if(direction == -1){
+      direction = (int)(random(4));
+      while(map[(y+directions[direction][0])/30][(x+directions[direction][1])/30].identifier >= 0){
+        direction = (int)(random(4));
+      }
+    }
   }
   
   public void move(){
-    map[x/30][y/30].ghostOn = true;
     if(direction >= 0){
       if(x<0 || x>=790){
         if(direction == dRIGHT){
