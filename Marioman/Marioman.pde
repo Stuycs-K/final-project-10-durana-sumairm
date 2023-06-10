@@ -1,8 +1,11 @@
 //menus
 boolean mainMenu = true; //<>// //<>// //<>//
-boolean playing = false; //<>// //<>// //<>//
+PImage Marioman; //<>//
+boolean playing = false; //<>// //<>//
 boolean levelSelection = false;
+PImage LevelSelection;
 boolean characterSelection = false;
+PImage CharacterSelection;
 boolean overScreen = false;
 boolean winScreen = false;
 
@@ -35,14 +38,14 @@ PImage Wario;
 ghost g3;
 PImage Waluigi;
 ghost g4;
-String character = "Mario";
-int lives = 3;
+String character = "Mario"; //<>//
+int lives = 3; //<>//
 PImage win;
  //<>//
 //power-ups //<>//
 int countdown;
-int ghostCountdown = 1199; //<>// //<>//
-powerUp pow = new powerUp(); //<>// //<>//
+int ghostCountdown = 1199; //<>//
+powerUp pow = new powerUp(); //<>//
 boolean notGodMode = true; //if it is true then you can die
 int godCount = 90; //<>//
 PImage power; //<>//
@@ -188,54 +191,89 @@ void reset(){
 //=============================== MENU DRAWING METHODS
 
 public void drawMainMenu(){
-  textFont(pacman);
-  textSize(100);
-  fill(#FFFF00);
-  textAlign(CENTER);
-  text("MARIO-MAN",400,405);
+  background(#2078ed);
+  fill(#0e4dbd);
+  stroke(#0e4dbd);
+  strokeWeight(4);
+  Marioman = loadImage("Marioman.png");
+  imageMode(CENTER);
+  image(Marioman,400,350,900,360);
+  imageMode(CORNER);
   rectMode(CENTER);
+  rect(250,465,260,50);
+  rect(560,465,260,50);
+  fill(#2078ed);
+  stroke(#24d3ff);
+  strokeWeight(4);
   rect(250,460,260,50);
   rect(560,460,260,50);
   rectMode(CORNER);
   textAlign(CENTER,CENTER);
   textFont(pixelFont);
-  textSize(20);
-  fill(0);
+  textSize(25);
+  fill(255);
   text("PLAY",250,460);
-  textSize(10);
+  textSize(13);
   text("CHARACTER\nCUSTOMIZATION",560,460);
   textAlign(LEFT,BASELINE);
 }
 
 public void drawLevelMenu(){
+  background(#2078ed);
+  LevelSelection = loadImage("LevelSelection.png");
+  imageMode(CENTER);
+  image(LevelSelection,400,180,900,360);
+  imageMode(CORNER);
   textFont(pixelFont);
   textAlign(CENTER,CENTER);
   textSize(15);
   rectMode(CENTER);
   int num = 1;
   for(int x = 100;  x < 810; x+= 151){
-    fill(#FFFF00);
+    fill(#0e4dbd);
+    stroke(#0e4dbd);
+    strokeWeight(4);
+    rect(x,355,140,40);
+    
+    fill(#2078ed);
+    stroke(#24d3ff);
     rect(x,350,140,40);
-    fill(0);
+    fill(255);
     text("LEVEL " + num,x,350);
     num++;
   }
   for(int x = 100;  x < 810; x+= 151){
-    fill(#FFFF00);
+    fill(#0e4dbd);
+    stroke(#0e4dbd);
+    strokeWeight(4);
+    rect(x,415,140,40);
+    
+    fill(#2078ed);
+    stroke(#24d3ff);
     rect(x,410,140,40);
-    fill(0);
+    fill(255);
     text("LEVEL " + num,x,410);
     num++;
   }
-  fill(#f3cf34);
+  fill(#0e4dbd);
+  stroke(#0e4dbd);
+  strokeWeight(4);
+  rect(405,485,140,40);
+  fill(#2078ed);
+  stroke(#24d3ff);
   rect(405,480,140,40);
-  fill(0);
+  fill(255);
   text("BACK",405,480);
   rectMode(CORNER);
   textAlign(LEFT,BASELINE);
 }
 
 public void drawCharacterMenu(){
+  background(#2078ed);
+  CharacterSelection = loadImage("CharacterSelection.png");
+  imageMode(CENTER);
+  image(CharacterSelection,400,180,700,280);
+  imageMode(CORNER);
   Mario = loadImage("Mario.png");
   PrincessPeach = loadImage("PrincessPeach.png");
   Luigi = loadImage("Luigi.png");
@@ -301,12 +339,18 @@ public void drawCharacterMenu(){
   fill(255);
   text("Rosalina",600,400);
   noStroke();
+  
+  fill(#0e4dbd);
+  stroke(#0e4dbd);
+  strokeWeight(4);
   rectMode(CENTER);
-  fill(#f3cf34);
+  rect(405,485,140,40);
+  fill(#2078ed);
+  stroke(#24d3ff);
   rect(405,480,140,40);
-  rectMode(CORNER);
-  fill(0);
+  fill(255);
   text("BACK",405,480);
+  rectMode(CORNER);
   imageMode(CORNER);
   textAlign(LEFT,BASELINE);
 }
