@@ -67,6 +67,22 @@
 ### date: June 6, 2023
 - worked on overlapping of ghosts, but not entirely functional
 
+### date: June 7, 2023
+- no work done
+
+### date: June 8, 2023
+- no work done
+
+### date: June 9, 2023
+- no work done
+
+### date: June 10, 2023
+- scrapped the overlapping fix
+- fixed ghosts just staying still when they were unable to movement
+- redesigned our UI for the final result
+
+### date: June 11, 2023
+
 
 ## GROUP MEMBER 2: Arlette Duran
 
