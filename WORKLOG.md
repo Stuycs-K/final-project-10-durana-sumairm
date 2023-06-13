@@ -1,3 +1,22 @@
+# Dev Log
+
+### Working Features
+- Character customization
+- Random power-up selection
+- Level selection
+- Speed power-up
+- Score tracker
+- Different menus
+- Game over/victory mechanism
+
+### Broken Features/Bugs
+- Invincibility power-up doesn't work (or may not have a long enough countdown)
+- Teleportation power-up is slightly random, will sometimes teleport to your cursor's position
+- Ghosts will overlap with one another, their movement algorithm isn't perfect, but they do move towards the player
+
+### Useful Resources
+- https://freepacman.org/
+
 # Work Log
 
 ## GROUP MEMBER 1: Minesh Sumair
